@@ -59,17 +59,19 @@
       margin: auto;
     }
     .widget-horizontal {
-      background-color: #f8f8f8;
+      background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
       padding: 40px 0;
       text-align: center;
+      overflow: hidden;
     }
     .widget-horizontal iframe {
       width: 100%;
-      min-width: 300px;
-      height: 400px;
+      height: 500px;
       border: none;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: block;
+      margin: 0 auto;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #e0f7ff 0%, #f8f8f8 100%);
@@ -140,7 +142,9 @@
     <h2>Featured Cruise</h2>
     <iframe 
       src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=horizontal"
-      title="GetYourGuide Horizontal Widget">
+      title="GetYourGuide Horizontal Widget"
+      scrolling="no"
+      style="overflow: hidden;">
     </iframe>
   </section>
   <section id="activities" class="activities-widget">
@@ -172,7 +176,7 @@
         <h3>Share</h3>
         <p style="font-size: 1.4em;">
           <a href="#" style="margin: 0 8px;">🌐</a>
-          <a href="#" style="margin: 0 8px;">🐦</a>
+          <a href="#" style="margin: 0 8px;">🕞</a>
           <a href="#" style="margin: 0 8px;">📘</a>
           <a href="#" style="margin: 0 8px;">📧</a>
         </p>
