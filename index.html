@@ -44,7 +44,7 @@
     }
     nav a {
       color: #f0f0f0;
-      margin: 0 18px;
+      margin: 0 12px;
       text-decoration: none;
       font-weight: 500;
       font-size: 1rem;
@@ -58,16 +58,30 @@
       max-width: 960px;
       margin: auto;
     }
-    .widget-horizontal iframe,
-    .activities-widget iframe {
+    .widget-horizontal {
+      background-color: #f0f0f0;
+      padding: 40px 0;
+      text-align: center;
+    }
+    .widget-horizontal iframe {
       width: 100%;
+      min-width: 300px;
       height: 400px;
       border: none;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+    .activities-widget {
+      background-color: #e0f7ff;
+      padding: 40px 0;
+      text-align: center;
+    }
     .activities-widget iframe {
+      width: 100%;
       height: 600px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     footer {
       background: #222;
@@ -88,45 +102,52 @@
 </header>
 
 <nav>
+  <a href="#">Home</a>
+  <a href="#">Boat Tours</a>
+  <a href="#">Landmarks</a>
+  <a href="#">Hotels</a>
+  <a href="#">Map</a>
+  <a href="#">About</a>
   <a href="#history">History</a>
   <a href="#experiences">Experiences</a>
   <a href="#activities">Activities</a>
 </nav>
 
 <section id="history" style="background-color: #ffffff;">
-  <div>
-    <h2>The Seine Through Time</h2>
-    <p>The Seine River has shaped the soul of Paris for centuries. It has witnessed the rise of kings, the birth of revolutions, and the timeless elegance of the City of Light. From medieval trade routes to modern-day cruises, the Seine remains the living artery of Parisian life.</p>
-  </div>
+  <h2>The Seine Through Time</h2>
+  <p>The Seine River has shaped the soul of Paris for centuries. It has witnessed the rise of kings, the birth of revolutions, and the timeless elegance of the City of Light. From medieval trade routes to modern-day cruises, the Seine remains the living artery of Parisian life.</p>
 </section>
 
-<section id="experiences" style="background-color: #f0f0f0;">
-  <div>
-    <h2>Top Experiences</h2>
-    <ul>
-      <li>🌉 Night boat cruises under the Eiffel Tower</li>
-      <li>🎧 Audio-guided historical tours</li>
-      <li>🍷 Wine tastings on the water</li>
-    </ul>
-
-    <h2>Start Your Journey</h2>
-    <p>
-      <a href="https://www.getyourguide.com/-l2605/?partner_id=X3LLOUG&cmp=seine-travel" target="_blank">
-        👉 View More Tours on GetYourGuide
-      </a>
-    </p>
-  </div>
+<section class="widget-horizontal">
+  <h2>Featured Cruise</h2>
+  <iframe 
+    src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=horizontal"
+    title="GetYourGuide Horizontal Widget">
+  </iframe>
 </section>
 
-<section id="activities" style="background-color: #e0f7ff; text-align: center;">
-  <div>
-    <h2>Explore More Activities Along the Seine</h2>
-    <iframe 
-      src="https://widget.getyourguide.com/default/activities.frame?q=seine&partner_id=X3LLOUG&locale_code=en-US&number_of_items=8" 
-      loading="lazy" 
-      title="Seine Activities from GetYourGuide">
-    </iframe>
-  </div>
+<section id="experiences" style="background-color: #f8f8f8;">
+  <h2>Top Experiences</h2>
+  <ul>
+    <li>🌉 Night boat cruises under the Eiffel Tower</li>
+    <li>🎧 Audio-guided historical tours</li>
+    <li>🍷 Wine tastings on the water</li>
+  </ul>
+  <h2>Start Your Journey</h2>
+  <p>
+    <a href="https://www.getyourguide.com/-l2605/?partner_id=X3LLOUG&cmp=seine-travel" target="_blank">
+      👉 View More Tours on GetYourGuide
+    </a>
+  </p>
+</section>
+
+<section id="activities" class="activities-widget">
+  <h2>Explore More Activities Along the Seine</h2>
+  <iframe 
+    src="https://widget.getyourguide.com/default/activities.frame?q=seine&partner_id=X3LLOUG&locale_code=en-US&number_of_items=8" 
+    loading="lazy" 
+    title="Seine Activities from GetYourGuide">
+  </iframe>
 </section>
 
 <footer>
