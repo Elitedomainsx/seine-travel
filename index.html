@@ -53,7 +53,7 @@
     }
     section {
       padding: 40px 20px;
-      max-width: 900px;
+      max-width: 960px;
       margin: auto;
     }
     section h2 {
@@ -91,20 +91,28 @@
   <p>The River Seine is the heart of Paris. From historic bridges to floating restaurants, it offers an unmatched view of the city's elegance. Whether you seek romance, adventure, or history — your journey starts here.</p>
 </section>
 
-<section style="text-align: center;">
-  <h2>Featured Experience</h2>
-  <p style="margin-top: -10px;">Our handpicked river cruise — Eiffel view included</p>
+<section style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin: 40px auto; max-width: 960px;">
 
-  <div style="display: flex; justify-content: center; margin: 40px 0;">
+  <!-- Widget ORIGINAL GetYourGuide a la izquierda -->
+  <div>
     <iframe 
       src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=vertical" 
       width="340" 
       height="600" 
-      style="border: 1px solid #ddd; border-radius: 12px;"
+      style="border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
       loading="lazy"
-      title="GetYourGuide Eiffel Tour Widget">
+      title="GetYourGuide Widget">
     </iframe>
   </div>
+
+  <!-- Bloque editorial a la derecha -->
+  <div style="max-width: 460px;">
+    <h3 style="margin-bottom: 10px;">Local Highlights</h3>
+    <p style="margin-bottom: 8px;">🌤️ Weather: Clear sky, 21°C</p>
+    <p style="margin-bottom: 8px;">🕒 Local Time: <span id="local-time">Loading...</span></p>
+    <p style="margin-top: 20px;">Enjoy a private cruise along the Seine with front-row views of the Eiffel Tower. Perfect for couples, proposals, or unforgettable nights in Paris.</p>
+  </div>
+
 </section>
 
 <section>
@@ -118,7 +126,7 @@
   <h2>Start Your Journey</h2>
   <p>
     <a href="https://www.getyourguide.com/-l2605/?partner_id=XXXXXX&cmp=seine-travel" target="_blank">
-      👉 View Tours on GetYourGuide
+      👉 View More Tours on GetYourGuide
     </a>
   </p>
 </section>
@@ -128,5 +136,15 @@
   <br>© 2025 seine.travel
 </footer>
 
+<script>
+  function updateLocalTime() {
+    const now = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Paris' });
+    document.getElementById("local-time").textContent = now + ' CEST';
+  }
+  updateLocalTime();
+  setInterval(updateLocalTime, 1000);
+</script>
+
 </body>
 </html>
+
