@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,8 +6,10 @@
   <title>Seine Travel - Explore Paris by River</title>
   <meta name="description" content="Explore unforgettable cruises, tours and stays in Paris. Curated experiences by the Seine — start your journey today.">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      overflow-x: hidden;
       font-family: 'Segoe UI', sans-serif;
       color: #333;
       background-color: #f8f8f8;
@@ -64,6 +66,14 @@
       max-width: 960px;
       text-align: center;
     }
+    .widget-horizontal iframe {
+      width: 100%;
+      max-width: 100%;
+      height: 260px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
     footer {
       background: #222;
       color: #aaa;
@@ -98,11 +108,7 @@
 
 <section class="widget-horizontal">
   <iframe 
-    src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=horizontal" 
-    width="100%" 
-    height="260" 
-    style="border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
-    loading="lazy"
+    src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=horizontal"
     title="GetYourGuide Widget">
   </iframe>
 </section>
@@ -128,15 +134,5 @@
   <br>© 2025 seine.travel
 </footer>
 
-<script>
-  function updateLocalTime() {
-    const now = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Paris' });
-    document.getElementById("local-time")?.textContent = now + ' CEST';
-  }
-  updateLocalTime();
-  setInterval(updateLocalTime, 1000);
-</script>
-
 </body>
 </html>
-
