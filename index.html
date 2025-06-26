@@ -91,16 +91,14 @@
   <p>The River Seine is the heart of Paris. From historic bridges to floating restaurants, it offers an unmatched view of the city's elegance. Whether you seek romance, adventure, or history — your journey starts here.</p>
 
   <div style="margin: 40px 0; display: flex; justify-content: center;">
-    <div 
-      data-gyg-href="https://widget.getyourguide.com/default/availability.frame"
-      data-gyg-tour-id="409183"
-      data-gyg-locale-code="en-US"
-      data-gyg-currency="EUR"
-      data-gyg-widget="availability"
-      data-gyg-variant="vertical"
-      data-gyg-partner-id="X3LLOUG">
-        <span>Loading experiences...</span>
-    </div>
+    <iframe 
+      src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=vertical" 
+      width="300" 
+      height="500" 
+      style="border: none; max-width: 100%;"
+      loading="lazy"
+      title="GetYourGuide Widget">
+    </iframe>
   </div>
 
   <h2>Top Experiences</h2>
@@ -123,13 +121,6 @@
   <br>© 2025 seine.travel
 </footer>
 
-<!-- ✅ Script de GetYourGuide cargado al final -->
-<script src="https://widget.getyourguide.com/dist/w.js"></script>
-<script>
-  window.addEventListener("load", function () {
-    if (window.GYG) window.GYG.init();
-  });
-</script>
-
 </body>
 </html>
+
