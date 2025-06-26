@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Seine Travel - Explore Paris by River</title>
   <meta name="description" content="Explore unforgettable cruises, tours and stays in Paris. Curated experiences by the Seine — start your journey today.">
   <style>
@@ -15,7 +15,7 @@
     header {
       background-image: url('seine-paris-eiffel-river-view.jpg');
       background-size: cover;
-      background-position: center center;
+      background-position: center;
       color: white;
       padding: 80px 20px;
       text-align: center;
@@ -48,21 +48,10 @@
     }
     section {
       padding: 40px 20px;
-      max-width: 1000px;
+      max-width: 960px;
       margin: auto;
     }
-    .experience-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-top: 40px;
-      align-items: flex-start;
-      justify-content: center;
-    }
-    .local-info {
-      max-width: 420px;
-    }
-    .local-info h3 {
+    section h2 {
       margin-top: 0;
     }
     footer {
@@ -72,6 +61,24 @@
       padding: 20px;
       font-size: 0.9em;
     }
+    .experience-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .widget-box {
+      min-width: 360px;
+      min-height: 500px;
+      border: 1px solid #eee;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    .local-info {
+      max-width: 420px;
+    }
     @media (max-width: 768px) {
       .experience-row {
         flex-direction: column;
@@ -79,6 +86,7 @@
       }
     }
   </style>
+  <script async src="https://widget.getyourguide.com/dist/guidedbooking.min.js"></script>
 </head>
 <body>
 
@@ -103,8 +111,8 @@
   <p>The River Seine is the heart of Paris. From historic bridges to floating restaurants, it offers an unmatched view of the city's elegance. Whether you seek romance, adventure, or history — your journey starts here.</p>
 
   <div class="experience-row">
-    <!-- Widget original GetYourGuide -->
-    <div>
+    <!-- Widget GetYourGuide -->
+    <div class="widget-box">
       <div data-gyg-href="https://widget.getyourguide.com/default/availability.frame"
            data-gyg-tour-id="409183"
            data-gyg-locale-code="en-US"
@@ -116,7 +124,7 @@
       </div>
     </div>
 
-    <!-- Descripción a la derecha -->
+    <!-- Información adicional -->
     <div class="local-info">
       <h3>Local Highlights</h3>
       <p>🌞 <strong>Weather:</strong> Clear sky, 21°C</p>
@@ -147,6 +155,6 @@
   <br>© 2025 seine.travel
 </footer>
 
-<script async defer src="https://widget.getyourguide.com/dist/embed.js"></script>
 </body>
 </html>
+
