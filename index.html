@@ -60,15 +60,22 @@
       margin-top: 0;
     }
     .widget-container {
-      display: grid;
-      grid-template-columns: 360px 1fr;
+      display: flex;
+      flex-wrap: wrap;
       gap: 30px;
-      align-items: start;
+      align-items: flex-start;
     }
-    iframe {
+    .widget-container iframe {
+      flex-shrink: 0;
+      width: 340px;
+      height: 600px;
       border: none;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .widget-container .text-block {
+      flex: 1;
+      min-width: 280px;
     }
     footer {
       background: #222;
@@ -107,14 +114,12 @@
   <!-- Widget original sin cambios -->
   <iframe 
     src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=vertical" 
-    width="340" 
-    height="600" 
     loading="lazy" 
     title="GetYourGuide Eiffel Cruise Widget">
   </iframe>
 
   <!-- Bloque de texto complementario -->
-  <div>
+  <div class="text-block">
     <h3>Local Highlights</h3>
     <p>🌤️ <strong>Weather:</strong> Clear sky, 21°C</p>
     <p>🕒 <strong>Local Time:</strong> <span id="local-time">Loading...</span></p>
