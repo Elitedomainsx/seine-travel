@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seine Travel - Explore Paris by River</title>
   <meta name="description" content="Explore unforgettable cruises, tours and stays in Paris. Curated experiences by the Seine — start your journey today.">
   <style>
@@ -15,7 +15,7 @@
     header {
       background-image: url('seine-paris-eiffel-river-view.jpg');
       background-size: cover;
-      background-position: center;
+      background-position: center center;
       color: white;
       padding: 80px 20px;
       text-align: center;
@@ -37,14 +37,19 @@
     }
     nav {
       background: #222;
-      padding: 10px;
+      padding: 14px 0;
       text-align: center;
     }
     nav a {
-      color: white;
-      margin: 0 15px;
+      color: #f0f0f0;
+      margin: 0 18px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffd700;
     }
     section {
       padding: 40px 20px;
@@ -54,6 +59,17 @@
     section h2 {
       margin-top: 0;
     }
+    .widget-container {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    iframe {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
     footer {
       background: #222;
       color: #aaa;
@@ -61,32 +77,7 @@
       padding: 20px;
       font-size: 0.9em;
     }
-    .experience-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-top: 40px;
-      align-items: flex-start;
-      justify-content: center;
-    }
-    .widget-box {
-      min-width: 360px;
-      min-height: 500px;
-      border: 1px solid #eee;
-      padding: 5px;
-      box-sizing: border-box;
-    }
-    .local-info {
-      max-width: 420px;
-    }
-    @media (max-width: 768px) {
-      .experience-row {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
   </style>
-  <script async src="https://widget.getyourguide.com/dist/guidedbooking.min.js"></script>
 </head>
 <body>
 
@@ -109,32 +100,30 @@
 <section>
   <h2>Why Explore the Seine?</h2>
   <p>The River Seine is the heart of Paris. From historic bridges to floating restaurants, it offers an unmatched view of the city's elegance. Whether you seek romance, adventure, or history — your journey starts here.</p>
+</section>
 
-  <div class="experience-row">
-    <!-- Widget GetYourGuide -->
-    <div class="widget-box">
-      <div data-gyg-href="https://widget.getyourguide.com/default/availability.frame"
-           data-gyg-tour-id="409183"
-           data-gyg-locale-code="en-US"
-           data-gyg-currency="EUR"
-           data-gyg-widget="availability"
-           data-gyg-variant="vertical"
-           data-gyg-partner-id="X3LLOUG">
-        <span>Powered by <a target="_blank" rel="sponsored" href="https://www.getyourguide.com/paris-l16/">GetYourGuide</a></span>
-      </div>
-    </div>
+<section class="widget-container">
 
-    <!-- Información adicional -->
-    <div class="local-info">
-      <h3>Local Highlights</h3>
-      <p>🌞 <strong>Weather:</strong> Clear sky, 21°C</p>
-      <p>🕓 <strong>Local Time:</strong> 03:16:33 CEST</p>
-      <p>
-        Enjoy a private cruise along the Seine with front-row views of the Eiffel Tower. Perfect for couples, proposals, or unforgettable nights in Paris.
-      </p>
-    </div>
+  <!-- Widget original sin cambios -->
+  <iframe 
+    src="https://widget.getyourguide.com/default/availability.frame?tour_id=409183&partner_id=X3LLOUG&locale_code=en-US&currency=EUR&widget=availability&variant=vertical" 
+    width="340" 
+    height="600" 
+    loading="lazy" 
+    title="GetYourGuide Eiffel Cruise Widget">
+  </iframe>
+
+  <!-- Bloque de texto complementario -->
+  <div>
+    <h3>Local Highlights</h3>
+    <p>🌤️ <strong>Weather:</strong> Clear sky, 21°C</p>
+    <p>🕒 <strong>Local Time:</strong> <span id="local-time">Loading...</span></p>
+    <p style="margin-top: 20px;">Enjoy a private cruise along the Seine with front-row views of the Eiffel Tower. Perfect for couples, proposals, or unforgettable nights in Paris.</p>
   </div>
 
+</section>
+
+<section>
   <h2>Top Experiences</h2>
   <ul>
     <li>🌉 Night boat cruises under Eiffel Tower</li>
@@ -144,8 +133,8 @@
 
   <h2>Start Your Journey</h2>
   <p>
-    👉 <a href="https://www.getyourguide.com/-l2605/?partner_id=X3LLOUG&cmp=seine-travel" target="_blank">
-      View Tours on GetYourGuide
+    <a href="https://www.getyourguide.com/-l2605/?partner_id=X3LLOUG&cmp=seine-travel" target="_blank">
+      👉 View More Tours on GetYourGuide
     </a>
   </p>
 </section>
@@ -155,6 +144,14 @@
   <br>© 2025 seine.travel
 </footer>
 
+<script>
+  function updateLocalTime() {
+    const now = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Paris' });
+    document.getElementById("local-time").textContent = now + ' CEST';
+  }
+  updateLocalTime();
+  setInterval(updateLocalTime, 1000);
+</script>
+
 </body>
 </html>
-
