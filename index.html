@@ -99,12 +99,9 @@
       data-gyg-widget="availability"
       data-gyg-variant="vertical"
       data-gyg-partner-id="X3LLOUG">
-        <span>Powered by 
-          <a target="_blank" rel="sponsored" href="https://www.getyourguide.com/paris-l16/">GetYourGuide</a>
-        </span>
+        <span>Loading experiences...</span>
     </div>
   </div>
-  <script src="https://widget.getyourguide.com/dist/w.js"></script>
 
   <h2>Top Experiences</h2>
   <ul>
@@ -125,6 +122,14 @@
   This site contains affiliate links. We may earn a commission at no extra cost to you.
   <br>© 2025 seine.travel
 </footer>
+
+<!-- ✅ Script de GetYourGuide cargado al final -->
+<script src="https://widget.getyourguide.com/dist/w.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    if (window.GYG) window.GYG.init();
+  });
+</script>
 
 </body>
 </html>
