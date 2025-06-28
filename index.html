@@ -7,138 +7,8 @@
   <meta name="description" content="Explore unforgettable cruises, tours and stays in Paris. Curated experiences by the Seine — start your journey today.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      font-family: 'Segoe UI', sans-serif;
-      color: #333;
-      background-color: #f8f8f8;
-    }
-    header {
-      background-image: url('seine-paris-eiffel-river-view.jpg');
-      background-size: cover;
-      background-position: center center;
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .header-text {
-      background: rgba(0, 0, 0, 0.45);
-      display: inline-block;
-      padding: 25px 30px;
-      border-radius: 10px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-    }
-    header h1 {
-      font-size: 3em;
-      margin: 0 0 10px 0;
-    }
-    header p {
-      font-size: 1.2em;
-      margin: 0;
-    }
-    nav {
-      background: #222;
-      padding: 14px 0;
-      text-align: center;
-    }
-    nav a {
-      color: #f0f0f0;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #ffd700;
-    }
-    section {
-      padding: 40px 20px;
-      margin: auto;
-    }
-    .widget-horizontal {
-      background: linear-gradient(to bottom, #ffffff 0%, #f8f8f8 100%);
-      padding: 40px 20px;
-      text-align: center;
-      overflow: hidden;
-      width: 100%;
-    }
-    .widget-horizontal iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: block;
-      margin: 0 auto;
-    }
-    .activities-widget {
-      background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
-      padding: 40px 20px;
-      text-align: center;
-      overflow: hidden;
-      width: 100%;
-    }
-    .activities-widget iframe {
-      width: 100%;
-      height: 1000px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: block;
-      margin: 0 auto;
-    }
-    footer.site-footer {
-      background: #1a1a2e;
-      color: #eee;
-      padding: 40px 20px;
-      font-size: 0.95em;
-    }
-    .footer-container {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    .footer-col {
-      flex: 1 1 200px;
-    }
-    .footer-col h3 {
-      border-bottom: 2px solid #777;
-      padding-bottom: 6px;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-    .footer-col a {
-      color: #ccc;
-      text-decoration: none;
-    }
-    .footer-col a:hover {
-      text-decoration: underline;
-    }
-    .social-icons a {
-      color: #ccc;
-      margin-right: 12px;
-      font-size: 1.2em;
-    }
-    @media (max-width: 600px) {
-      .footer-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .footer-col {
-        margin-bottom: 20px;
-      }
-      .social-icons a {
-        margin-right: 16px;
-      }
-    }
-  </style>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <main>
@@ -151,7 +21,7 @@
   <nav>
   <a href="#">Home</a>
   <a href="#cruises">Seine River Cruises</a>
-  <a href="hotels.html">Hotels</a>
+  <a href="pages/hotels.html">Hotels</a>
   <a href="#history">History</a>
 </nav>
   
@@ -209,14 +79,14 @@
   <h2>📸 Seine River Photo Gallery</h2>
   <p>Visual highlights from the most iconic spots along the Seine River — from bridges to boat cruises and Parisian riverbanks.</p>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 30px;">
-      <a href="gallery-louvre-pont-carrousel.jpg" data-lightbox="seine-gallery" data-title="Louvre Museum and Pont du Carrousel seen from the Seine River"><img src="gallery-louvre-pont-carrousel.jpg" alt="Louvre Museum and Pont du Carrousel seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-notre-dame-saint-michel.jpg" data-lightbox="seine-gallery" data-title="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge"><img src="gallery-notre-dame-saint-michel.jpg" alt="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-pont-change-conciergerie.jpg" data-lightbox="seine-gallery" data-title="Pont au Change and Conciergerie on the Seine River in Paris"><img src="gallery-pont-change-conciergerie.jpg" alt="Pont au Change and Conciergerie on the Seine River in Paris" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-eiffel-pont-alexandre.jpg" data-lightbox="seine-gallery" data-title="View of Eiffel Tower and Pont Alexandre III from the Seine"><img src="gallery-eiffel-pont-alexandre.jpg" alt="View of Eiffel Tower and Pont Alexandre III from the Seine" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-alexandre-night.jpg" data-lightbox="seine-gallery" data-title="Pont Alexandre III at night with lights and golden statues"><img src="gallery-alexandre-night.jpg" alt="Pont Alexandre III at night with lights and golden statues" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-notre-dame-petit-pont.jpg" data-lightbox="seine-gallery" data-title="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes"><img src="gallery-notre-dame-petit-pont.jpg" alt="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-pont-des-arts-france.jpg" data-lightbox="seine-gallery" data-title="Pont des Arts and the Institut de France seen from the Seine River"><img src="gallery-pont-des-arts-france.jpg" alt="Pont des Arts and the Institut de France seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
-      <a href="gallery-paris-sunset-view.jpg" data-lightbox="seine-gallery" data-title="Panoramic sunset view of Paris and the Seine River from above"><img src="gallery-paris-sunset-view.jpg" alt="Panoramic sunset view of Paris and the Seine River from above" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-louvre-pont-carrousel.jpg" data-lightbox="seine-gallery" data-title="Louvre Museum and Pont du Carrousel seen from the Seine River"><img src="assets/images/gallery-louvre-pont-carrousel.jpg" alt="Louvre Museum and Pont du Carrousel seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-notre-dame-saint-michel.jpg" data-lightbox="seine-gallery" data-title="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge"><img src="assets/images/gallery-notre-dame-saint-michel.jpg" alt="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-pont-change-conciergerie.jpg" data-lightbox="seine-gallery" data-title="Pont au Change and Conciergerie on the Seine River in Paris"><img src="assets/images/gallery-pont-change-conciergerie.jpg" alt="Pont au Change and Conciergerie on the Seine River in Paris" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-eiffel-pont-alexandre.jpg" data-lightbox="seine-gallery" data-title="View of Eiffel Tower and Pont Alexandre III from the Seine"><img src="assets/images/gallery-eiffel-pont-alexandre.jpg" alt="View of Eiffel Tower and Pont Alexandre III from the Seine" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-alexandre-night.jpg" data-lightbox="seine-gallery" data-title="Pont Alexandre III at night with lights and golden statues"><img src="assets/images/gallery-alexandre-night.jpg" alt="Pont Alexandre III at night with lights and golden statues" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-notre-dame-petit-pont.jpg" data-lightbox="seine-gallery" data-title="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes"><img src="assets/images/gallery-notre-dame-petit-pont.jpg" alt="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-pont-des-arts-france.jpg" data-lightbox="seine-gallery" data-title="Pont des Arts and the Institut de France seen from the Seine River"><img src="assets/images/gallery-pont-des-arts-france.jpg" alt="Pont des Arts and the Institut de France seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="assets/images/gallery-paris-sunset-view.jpg" data-lightbox="seine-gallery" data-title="Panoramic sunset view of Paris and the Seine River from above"><img src="assets/images/gallery-paris-sunset-view.jpg" alt="Panoramic sunset view of Paris and the Seine River from above" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
     </div>
 </section>
 
@@ -232,7 +102,7 @@
         <h3>Explore</h3>
         <p><a href="#history">History</a><br>
            <a href="#cruises">Cruises</a><br>
-           <a href="hotels.html">Hotels</a><br>
+           <a href="pages/hotels.html">Hotels</a><br>
            <a href="#photo-gallery">Gallery</a></p>
       </div>
       <div class="footer-col">
