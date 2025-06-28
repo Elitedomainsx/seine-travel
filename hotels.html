@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Seine Travel - Top Hotels by the Seine</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     html, body {
       margin: 0;
@@ -91,16 +92,52 @@
       color: #333;
       cursor: pointer;
     }
-    footer {
-      background: #f8f8f8;
-      color: #222;
+    footer.site-footer {
+      background: #1a1a2e;
+      color: #eee;
       padding: 40px 20px;
-      text-align: center;
       font-size: 0.95em;
     }
-    footer a {
-      color: #333;
+    .footer-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .footer-col {
+      flex: 1 1 200px;
+    }
+    .footer-col h3 {
+      border-bottom: 2px solid #777;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .footer-col a {
+      color: #ccc;
       text-decoration: none;
+    }
+    .footer-col a:hover {
+      text-decoration: underline;
+    }
+    .social-icons a {
+      color: #ccc;
+      margin-right: 12px;
+      font-size: 1.2em;
+    }
+    @media (max-width: 600px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-col {
+        margin-bottom: 20px;
+      }
+      .social-icons a {
+        margin-right: 16px;
+      }
     }
   </style>
 </head>
@@ -146,29 +183,33 @@
     </div>
   </section>
 
-  <footer>
-    <div style="max-width: 1000px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 40px; text-align: left;">
-      <div>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
         <h3>About Us</h3>
-        <p>📧 <a href="mailto:contact@seine.travel">contact@seine.travel</a><br>
-           📍 Paris, France</p>
-        <p>© 2025 seine.travel</p>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:contact@seine.travel">contact@seine.travel</a></p>
+        <p><i class="fa-solid fa-location-dot"></i> Paris, France</p>
+        <p>&copy; 2025 seine.travel</p>
       </div>
-      <div>
-        <h3>Links</h3>
+      <div class="footer-col">
+        <h3>Explore</h3>
         <p><a href="index.html#history">History</a><br>
            <a href="index.html#cruises">Cruises</a><br>
            <a href="hotels.html">Hotels</a><br>
            <a href="index.html#photo-gallery">Gallery</a></p>
       </div>
-      <div>
-        <h3>Share</h3>
-        <p style="font-size: 1.4em;">
-          <a href="#" style="margin: 0 8px;">🌐</a>
-          <a href="#" style="margin: 0 8px;">🕞</a>
-          <a href="#" style="margin: 0 8px;">📘</a>
-          <a href="#" style="margin: 0 8px;">📧</a>
-        </p>
+      <div class="footer-col">
+        <h3>Connect</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Discover More</h3>
+        <p><a href="#">Upcoming Destinations</a></p>
       </div>
     </div>
   </footer>
