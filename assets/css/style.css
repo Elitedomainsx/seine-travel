@@ -179,20 +179,12 @@
         height: 360px;
       }
       .activities-widget .gyg-frame {
-        height: auto !important;
-        min-height: auto !important;
+        width: 100%;
       }
       [data-gyg-widget="activities"] {
         overflow-x: auto;
         flex-wrap: wrap;
-        height: auto !important;
-        min-height: auto !important;
         overflow: visible !important;
         display: block !important;
-      }
-      .activities-widget {
-        height: auto !important;
-        min-height: auto !important;
-        overflow: visible !important;
       }
     }
