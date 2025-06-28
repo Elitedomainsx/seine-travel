@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Seine Travel - Explore Paris by River</title>
   <meta name="description" content="Explore unforgettable cruises, tours and stays in Paris. Curated experiences by the Seine — start your journey today.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
   <style>
     html, body {
       margin: 0;
@@ -167,19 +168,19 @@
   </div>
 </section>
 
-<section id="photo-gallery" style="background: linear-gradient(to bottom, #fff7e6 0%, #f8f8f8 100%); padding: 60px 20px; text-align: center;">
+  <section id="photo-gallery" style="background: linear-gradient(to bottom, #fff7e6 0%, #f8f8f8 100%); padding: 60px 20px; text-align: center;">
   <h2>📸 Seine River Photo Gallery</h2>
   <p>Visual highlights from the most iconic spots along the Seine River — from bridges to boat cruises and Parisian riverbanks.</p>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 30px;">
-    <img src="gallery-louvre-pont-carrousel.jpg" alt="Louvre Museum and Pont du Carrousel seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-notre-dame-saint-michel.jpg" alt="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-pont-change-conciergerie.jpg" alt="Pont au Change and Conciergerie on the Seine River in Paris" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-eiffel-pont-alexandre.jpg" alt="View of Eiffel Tower and Pont Alexandre III from the Seine" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-alexandre-night.jpg" alt="Pont Alexandre III at night with lights and golden statues" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-notre-dame-petit-pont.jpg" alt="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-pont-des-arts-france.jpg" alt="Pont des Arts and the Institut de France seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-    <img src="gallery-paris-sunset-view.jpg" alt="Panoramic sunset view of Paris and the Seine River from above" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-  </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 30px;">
+      <a href="gallery-louvre-pont-carrousel.jpg" data-lightbox="seine-gallery" data-title="Louvre Museum and Pont du Carrousel seen from the Seine River"><img src="gallery-louvre-pont-carrousel.jpg" alt="Louvre Museum and Pont du Carrousel seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-notre-dame-saint-michel.jpg" data-lightbox="seine-gallery" data-title="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge"><img src="gallery-notre-dame-saint-michel.jpg" alt="Notre-Dame Cathedral viewed from the Seine with Saint-Michel Bridge" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-pont-change-conciergerie.jpg" data-lightbox="seine-gallery" data-title="Pont au Change and Conciergerie on the Seine River in Paris"><img src="gallery-pont-change-conciergerie.jpg" alt="Pont au Change and Conciergerie on the Seine River in Paris" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-eiffel-pont-alexandre.jpg" data-lightbox="seine-gallery" data-title="View of Eiffel Tower and Pont Alexandre III from the Seine"><img src="gallery-eiffel-pont-alexandre.jpg" alt="View of Eiffel Tower and Pont Alexandre III from the Seine" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-alexandre-night.jpg" data-lightbox="seine-gallery" data-title="Pont Alexandre III at night with lights and golden statues"><img src="gallery-alexandre-night.jpg" alt="Pont Alexandre III at night with lights and golden statues" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-notre-dame-petit-pont.jpg" data-lightbox="seine-gallery" data-title="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes"><img src="gallery-notre-dame-petit-pont.jpg" alt="Notre-Dame Cathedral from the Seine River with Petit Pont and Paris bouquinistes" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-pont-des-arts-france.jpg" data-lightbox="seine-gallery" data-title="Pont des Arts and the Institut de France seen from the Seine River"><img src="gallery-pont-des-arts-france.jpg" alt="Pont des Arts and the Institut de France seen from the Seine River" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+      <a href="gallery-paris-sunset-view.jpg" data-lightbox="seine-gallery" data-title="Panoramic sunset view of Paris and the Seine River from above"><img src="gallery-paris-sunset-view.jpg" alt="Panoramic sunset view of Paris and the Seine River from above" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;"></a>
+    </div>
 </section>
 
 <footer>
@@ -207,7 +208,8 @@
         </p>
       </div>
     </div>
-</footer>
-  </main>
-</body>
+  </footer>
+    </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+  </body>
 </html>
