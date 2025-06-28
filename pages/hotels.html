@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       margin: 0;
       padding: 0;
@@ -14,6 +17,15 @@
       font-family: 'Segoe UI', sans-serif;
       color: #333;
       background-color: #f8f8f8;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    p, h1, h2, h3 {
+      word-wrap: break-word;
     }
     header {
       background-image: url('../assets/images/seine-paris-eiffel-river-view.jpg');
@@ -46,15 +58,24 @@
       font-weight: 500;
       font-size: 1rem;
       transition: color 0.3s ease;
+      display: inline-block;
+      padding: 4px 8px;
+      min-width: 44px;
+      min-height: 44px;
     }
     nav a:hover {
       color: #ffd700;
     }
-    .intro {
+    .container {
       max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .intro {
       margin: 40px auto;
       font-style: italic;
       padding: 0 20px;
+      max-width: 960px;
     }
     .hotel-grid {
       max-width: 960px;
@@ -92,6 +113,8 @@
       border-radius: 6px;
       color: #333;
       cursor: pointer;
+      min-width: 44px;
+      min-height: 44px;
     }
     footer.site-footer {
       background: #1a1a2e;
@@ -138,6 +161,20 @@
       }
       .social-icons a {
         margin-right: 16px;
+      }
+    }
+    @media (max-width: 768px) {
+      header {
+        padding: 60px 15px;
+      }
+      header h1 {
+        font-size: 2em;
+      }
+      nav a {
+        display: block;
+        margin: 8px 0;
+        min-width: 44px;
+        min-height: 44px;
       }
     }
   </style>

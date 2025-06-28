@@ -1,3 +1,6 @@
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       margin: 0;
       padding: 0;
@@ -5,6 +8,15 @@
       font-family: 'Segoe UI', sans-serif;
       color: #333;
       background-color: #f8f8f8;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    p, h1, h2, h3 {
+      word-wrap: break-word;
     }
     header {
       background-image: url('../images/seine-paris-eiffel-river-view.jpg');
@@ -41,9 +53,18 @@
       font-weight: 500;
       font-size: 1rem;
       transition: color 0.3s ease;
+      display: inline-block;
+      padding: 4px 8px;
+      min-width: 44px;
+      min-height: 44px;
     }
     nav a:hover {
       color: #ffd700;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
     section {
       padding: 40px 20px;
@@ -56,14 +77,17 @@
       overflow: hidden;
       width: 100%;
     }
-    .widget-horizontal iframe {
+    .gyg-frame {
       width: 100%;
-      height: 400px;
+      height: 1000px;
       border: none;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       display: block;
       margin: 0 auto;
+    }
+    .gyg-featured {
+      height: 400px;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
@@ -72,14 +96,9 @@
       overflow: hidden;
       width: 100%;
     }
-    .activities-widget iframe {
+    .history-section {
+      background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
       width: 100%;
-      height: 1000px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: block;
-      margin: 0 auto;
     }
     footer.site-footer {
       background: #1a1a2e;
@@ -126,5 +145,24 @@
       }
       .social-icons a {
         margin-right: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 60px 15px;
+      }
+      header h1 {
+        font-size: 2em;
+      }
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+      .gyg-featured {
+        height: 360px;
+      }
+      .activities-widget .gyg-frame {
+        height: 1100px;
       }
     }
