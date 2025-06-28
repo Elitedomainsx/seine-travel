@@ -114,7 +114,7 @@
     .social-icons a {
       color: #ccc;
       margin-right: 12px;
-      font-size: 1.2em;
+      font-size: 1.5em;
     }
     @media (max-width: 600px) {
       .footer-container {
