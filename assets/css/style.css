@@ -91,7 +91,7 @@
       height: 400px;
     }
     .gyg-activities {
-      min-height: 1600px;
+      min-height: 2000px;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
@@ -191,6 +191,6 @@
         display: block !important;
       }
       .gyg-activities {
-        min-height: 2200px;
+        min-height: 3000px;
       }
     }
