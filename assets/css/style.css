@@ -90,6 +90,9 @@
     .gyg-featured {
       height: 400px;
     }
+    .gyg-activities {
+      min-height: 1600px;
+    }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
       padding: 40px 20px;
@@ -186,5 +189,8 @@
         flex-wrap: wrap;
         overflow: visible !important;
         display: block !important;
+      }
+      .gyg-activities {
+        min-height: 3200px;
       }
     }
