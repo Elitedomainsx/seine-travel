@@ -87,9 +87,12 @@
       display: block;
       margin: 0 auto;
     }
-    .gyg-featured {
-      height: 400px;
-    }
+  .gyg-featured {
+    height: 400px;
+  }
+  .gyg-horizontal-wrapper {
+    overflow-x: auto;
+  }
     .gyg-activities {
       /* reduce whitespace while showing all desktop activities */
       min-height: 1000px;
@@ -184,6 +187,12 @@
       }
       .activities-widget .gyg-frame {
         width: 100%;
+      }
+      .gyg-horizontal-wrapper {
+        -webkit-overflow-scrolling: touch;
+      }
+      .gyg-horizontal-wrapper .gyg-frame {
+        min-width: 600px;
       }
       [data-gyg-widget="activities"] {
         overflow-x: auto;
