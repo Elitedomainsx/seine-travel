@@ -90,8 +90,20 @@
   .gyg-featured {
     height: 400px;
   }
+  .gyg-featured-mobile {
+    height: 480px;
+  }
   .gyg-horizontal-wrapper {
     overflow-x: auto;
+  }
+  .gyg-vertical-wrapper {
+    overflow: hidden;
+  }
+  .desktop-only {
+    display: block;
+  }
+  .mobile-only {
+    display: none;
   }
     .gyg-activities {
       /* reduce whitespace while showing all desktop activities */
@@ -185,14 +197,23 @@
       .gyg-featured {
         height: 360px;
       }
+      .gyg-featured-mobile {
+        height: 500px;
+      }
       .activities-widget .gyg-frame {
         width: 100%;
       }
       .gyg-horizontal-wrapper {
-        -webkit-overflow-scrolling: touch;
+        display: none;
       }
-      .gyg-horizontal-wrapper .gyg-frame {
-        min-width: 600px;
+      .desktop-only {
+        display: none;
+      }
+      .mobile-only {
+        display: block;
+      }
+      .gyg-vertical-wrapper .gyg-frame {
+        min-width: 0;
       }
       [data-gyg-widget="activities"] {
         overflow-x: auto;
