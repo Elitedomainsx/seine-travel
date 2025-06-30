@@ -92,7 +92,7 @@
     }
     .gyg-activities {
       /* reduce whitespace while showing all desktop activities */
-      min-height: 1500px;
+      min-height: 1000px;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
