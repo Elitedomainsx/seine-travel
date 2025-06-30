@@ -91,7 +91,8 @@
       height: 400px;
     }
     .gyg-activities {
-      min-height: 2000px;
+      /* allow dynamic resizing to avoid large gaps on desktop */
+      min-height: 0;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
