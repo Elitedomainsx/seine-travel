@@ -196,11 +196,11 @@
       }
       .gyg-featured {
         /* taller height so the "Powered by GetYourGuide" text isn't cut off */
-        height: 400px;
+        height: 390px;
       }
       .gyg-featured-mobile {
         /* ensure full widget including attribution is visible on mobile */
-        height: 580px;
+        height: 560px;
       }
       .activities-widget .gyg-frame {
         width: 100%;
