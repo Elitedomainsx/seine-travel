@@ -105,8 +105,8 @@
     display: none;
   }
     .gyg-activities {
-      /* ensure entire list of activities is visible */
-      min-height: 1500px;
+      /* allow the widget to define its own height */
+      height: auto;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
@@ -221,7 +221,7 @@
         display: block !important;
       }
       .gyg-activities {
-        /* ensure mobile widget displays all 8 activities without extra gap */
-        height: 2000px;
+        /* allow the widget to size itself on mobile */
+        height: auto;
       }
     }
