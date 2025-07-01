@@ -225,6 +225,6 @@
         /* allow the widget to size itself on mobile */
         height: auto;
         /* ensure full activity list is visible on mobile */
-        min-height: 2900px;
+        min-height: 2850px;
       }
     }
