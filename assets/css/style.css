@@ -1,3 +1,12 @@
+    :root {
+      --primary-color: #01579b;
+      --secondary-color: #003c71;
+      --accent-color: #f7b733;
+      --text-color: #333;
+      --light-text: #f0f0f0;
+      --background-color: #f8f8f8;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -5,9 +14,9 @@
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-      font-family: 'Segoe UI', sans-serif;
-      color: #333;
-      background-color: #f8f8f8;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
       font-size: 16px;
       line-height: 1.6;
     }
@@ -18,13 +27,18 @@
     p, h1, h2, h3 {
       word-wrap: break-word;
     }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
     header {
-      background-image: url('../images/seine-paris-eiffel-river-view.jpg');
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.3)),
+                  url('../images/seine-paris-eiffel-river-view.jpg');
       background-size: cover;
       background-position: center center;
-      color: white;
+      color: var(--light-text);
       padding: 80px 20px;
       text-align: center;
+      position: relative;
     }
     .header-text {
       background: rgba(0, 0, 0, 0.45);
@@ -42,12 +56,13 @@
       margin: 0;
     }
     nav {
-      background: #222;
+      background: var(--secondary-color);
       padding: 14px 0;
       text-align: center;
+      position: relative;
     }
     nav a {
-      color: #f0f0f0;
+      color: var(--light-text);
       margin: 0 12px;
       text-decoration: none;
       font-weight: 500;
@@ -59,15 +74,26 @@
       min-height: 44px;
     }
     nav a:hover {
-      color: #ffd700;
+      color: var(--accent-color);
+    }
+    .menu-toggle {
+      display: none;
+      position: absolute;
+      right: 20px;
+      top: 14px;
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5em;
+      cursor: pointer;
     }
     .container {
-      max-width: 960px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 20px;
     }
     section {
-      padding: 40px 20px;
+      padding: 60px 20px;
       margin: auto;
     }
     .widget-horizontal {
@@ -189,6 +215,16 @@
       }
       header h1 {
         font-size: 2em;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      nav {
+        display: none;
+        flex-direction: column;
+      }
+      nav.open {
+        display: flex;
       }
       nav a {
         display: block;
