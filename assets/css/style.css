@@ -77,15 +77,15 @@
       overflow: hidden;
       width: 100%;
     }
-    .gyg-frame {
-      width: 100%;
-      height: auto;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: block;
-      margin: 0 auto;
-    }
+      .gyg-frame {
+        width: 100%;
+        height: auto;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        display: block;
+        margin: 0 auto;
+      }
   .gyg-featured {
     height: 320px;
   }
