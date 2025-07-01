@@ -221,6 +221,7 @@
         display: block !important;
       }
       .gyg-activities {
-        min-height: 3000px;
+        /* allow height to fit content on mobile to avoid large gaps */
+        min-height: 0;
       }
     }
