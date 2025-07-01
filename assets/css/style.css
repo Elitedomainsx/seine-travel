@@ -224,6 +224,6 @@
       .gyg-activities {
         /* allow the widget to size itself on mobile */
         height: auto;
-        min-height: 1600px;
+        min-height: 2000px;
       }
     }
