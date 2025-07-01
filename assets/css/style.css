@@ -107,6 +107,7 @@
     .gyg-activities {
       /* allow the widget to define its own height */
       height: auto;
+      min-height: 600px;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
@@ -223,5 +224,6 @@
       .gyg-activities {
         /* allow the widget to size itself on mobile */
         height: auto;
+        min-height: 1600px;
       }
     }
