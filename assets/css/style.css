@@ -301,7 +301,7 @@
 /* CTA above the GetYourGuide widget */
 .cta-container {
   text-align: center;
-  background-color: #f3f3f3;
+  background-color: transparent;
   padding: 24px 0;
   margin-bottom: 20px;
 }
