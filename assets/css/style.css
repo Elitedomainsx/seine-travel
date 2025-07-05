@@ -329,3 +329,10 @@
     padding: 12px 16px;
   }
 }
+
+/* Prevent floating CTA overlap on small screens */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 80px; /* space for fixed CTA button */
+  }
+}
