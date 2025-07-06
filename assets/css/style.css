@@ -298,6 +298,13 @@
   }
 }
 
+/* Ensure attribution text from widgets remains visible on desktop */
+@media (min-width: 769px) {
+  [data-gyg-widget="activities"] {
+    padding-bottom: 40px; /* room for "Powered by GetYourGuide" */
+  }
+}
+
 /* CTA above the GetYourGuide widget */
 .cta-container {
   text-align: center;
