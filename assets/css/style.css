@@ -134,7 +134,7 @@
     .gyg-activities {
       /* allow the widget to define its own height */
       height: auto;
-      min-height: 1000px;
+      min-height: 1200px;
     }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
@@ -144,7 +144,7 @@
       overflow: visible;
       min-height: auto;
     }
-    [data-gyg-widget="activities"] {
+[data-gyg-widget="activities"] {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
@@ -152,6 +152,7 @@
       overflow-x: auto;
       overflow-y: visible;
       min-height: auto;
+      padding-bottom: 40px; /* space for attribution */
     }
     [data-gyg-widget="activities"] iframe {
       flex: 1 1 300px;
@@ -264,13 +265,13 @@
         /* allow the widget to size itself on mobile */
         height: auto;
         /* ensure full activity list is visible on mobile */
-    min-height: 2850px;
-  }
+        min-height: 3200px;
+      }
 }
 
 .gyg-cta {
   text-align: center;
-  margin: 20px auto;
+  margin: 20px auto 60px;
 }
 
 .gyg-cta a {
@@ -308,7 +309,7 @@
 /* Ensure CTA stays above the GetYourGuide attribution bar */
 @media (min-width: 769px) {
   .gyg-cta {
-    margin-bottom: 60px;  /* adjust so the attribution isn't covered */
+    margin-bottom: 80px;  /* extra room for attribution on large screens */
   }
 }
 
