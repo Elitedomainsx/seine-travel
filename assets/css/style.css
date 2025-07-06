@@ -269,47 +269,10 @@
       }
 }
 
-.gyg-cta {
-  text-align: center;
-  margin: 20px auto 60px;
-}
-
-.gyg-cta a {
-  display: inline-block;
-  background-color: #01579b;
-  color: white;
-  padding: 14px 28px;
-  font-size: 18px;
-  border-radius: 32px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.gyg-cta a:hover {
-  background-color: #003f6b;
-}
-
-/* Responsive tweak */
-@media (max-width: 480px) {
-  .gyg-cta a {
-    width: 90%;
-    font-size: 16px;
-    padding: 12px 16px;
-  }
-}
-
 /* Ensure attribution text from widgets remains visible on desktop */
 @media (min-width: 769px) {
   [data-gyg-widget="activities"] {
     padding-bottom: 40px; /* room for "Powered by GetYourGuide" */
-  }
-}
-
-/* Ensure CTA stays above the GetYourGuide attribution bar */
-@media (min-width: 769px) {
-  .gyg-cta {
-    margin-bottom: 80px;  /* extra room for attribution on large screens */
   }
 }
 
