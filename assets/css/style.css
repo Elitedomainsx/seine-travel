@@ -305,6 +305,13 @@
   }
 }
 
+/* Ensure CTA stays above the GetYourGuide attribution bar */
+@media (min-width: 769px) {
+  .gyg-cta {
+    margin-bottom: 60px;  /* adjust so the attribution isn't covered */
+  }
+}
+
 /* CTA above the GetYourGuide widget */
 .cta-container {
   text-align: center;
