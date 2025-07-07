@@ -158,7 +158,7 @@
 }
 @media (max-width: 480px) {
   [data-gyg-widget="availability"] {
-    min-height: 650px;
+    min-height: 600px;
     padding-bottom: 80px; /* extra space on small screens */
   }
   [data-gyg-widget="availability"]::after {
