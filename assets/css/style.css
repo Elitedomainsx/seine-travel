@@ -110,6 +110,7 @@
       text-align: center;
       width: 100%;
       overflow: visible;
+      min-height: 100vh;
     }
 [data-gyg-widget="activities"] {
   width: 100%;
