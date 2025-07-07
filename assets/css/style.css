@@ -145,6 +145,7 @@
 @media (max-width: 480px) {
   [data-gyg-widget="activities"] {
     padding-bottom: 80px;
+    min-height: 1400px;
   }
   [data-gyg-widget="activities"]::after {
     height: 40px;
