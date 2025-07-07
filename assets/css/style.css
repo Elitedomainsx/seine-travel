@@ -134,8 +134,7 @@
       overflow-x: auto;
       overflow-y: visible;
       min-height: auto;
-      padding-bottom: 60px; /* space for Powered by GetYourGuide */
-      position: relative;
+      margin-bottom: 80px; /* space for Powered by GetYourGuide */
     }
 [data-gyg-widget="activities"]::after {
   content: "";
