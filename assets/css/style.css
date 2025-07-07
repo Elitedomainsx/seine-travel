@@ -136,11 +136,33 @@
       min-height: auto;
       padding-bottom: 40px; /* space for attribution */
     }
-    [data-gyg-widget="activities"] iframe {
-      flex: 1 1 300px;
-      display: block;
-      width: 100%;
-    }
+[data-gyg-widget="activities"] iframe {
+  flex: 1 1 300px;
+  display: block;
+  width: 100%;
+}
+
+/* Ensure availability widget content is never clipped */
+[data-gyg-widget="availability"] {
+  width: 100%;
+  display: block;
+  overflow: visible;
+  padding-bottom: 80px; /* space for buttons/attribution */
+  position: relative;
+}
+[data-gyg-widget="availability"]::after {
+  content: "";
+  display: block;
+  height: 40px; /* additional breathing room */
+}
+@media (max-width: 480px) {
+  [data-gyg-widget="availability"] {
+    padding-bottom: 100px; /* extra space on small screens */
+  }
+  [data-gyg-widget="availability"]::after {
+    height: 50px;
+  }
+}
     .history-section {
       background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
       width: 100%;
