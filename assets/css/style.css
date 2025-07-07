@@ -223,7 +223,7 @@
       }
       [data-gyg-widget="activities"] {
         overflow: visible;
-        min-height: 3000px;
+        min-height: 2900px;
         padding-bottom: 100px;
       }
       [data-gyg-widget="activities"]::after {
