@@ -113,24 +113,6 @@
         display: block;
         margin: 0 auto;
       }
-  .gyg-featured {
-    height: 320px;
-  }
-  .gyg-featured-mobile {
-    height: 480px;
-  }
-  .gyg-horizontal-wrapper {
-    overflow-x: auto;
-  }
-  .gyg-vertical-wrapper {
-    overflow: hidden;
-  }
-  .desktop-only {
-    display: block;
-  }
-  .mobile-only {
-    display: none;
-  }
     .gyg-activities {
       /* allow the widget to define its own height */
       height: auto;
@@ -232,28 +214,8 @@
         display: block;
         margin: 8px 0;
       }
-      .gyg-featured {
-        /* taller height so the "Powered by GetYourGuide" text isn't cut off */
-        height: 380px;
-      }
-      .gyg-featured-mobile {
-        /* ensure full widget including attribution is visible on mobile */
-        height: 540px;
-      }
       .activities-widget .gyg-frame {
         width: 100%;
-      }
-      .gyg-horizontal-wrapper {
-        display: none;
-      }
-      .desktop-only {
-        display: none;
-      }
-      .mobile-only {
-        display: block;
-      }
-      .gyg-vertical-wrapper .gyg-frame {
-        min-width: 0;
       }
       [data-gyg-widget="activities"] {
         overflow-x: auto;
