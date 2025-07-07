@@ -134,8 +134,23 @@
       overflow-x: auto;
       overflow-y: visible;
       min-height: auto;
-      padding-bottom: 40px; /* space for attribution */
+      padding-bottom: 60px; /* space for Powered by GetYourGuide */
+      position: relative;
     }
+[data-gyg-widget="activities"]::after {
+  content: "";
+  display: block;
+  height: 32px; /* extra breathing room */
+}
+
+@media (max-width: 480px) {
+  [data-gyg-widget="activities"] {
+    padding-bottom: 80px;
+  }
+  [data-gyg-widget="activities"]::after {
+    height: 40px;
+  }
+}
 [data-gyg-widget="activities"] iframe {
   flex: 1 1 300px;
   display: block;
