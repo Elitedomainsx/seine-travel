@@ -135,7 +135,7 @@
       overflow-y: visible;
       min-height: auto;
       margin-bottom: 80px; /* space for Powered by GetYourGuide */
-      min-height: 1200px;
+      min-height: 1000px;
     }
 [data-gyg-widget="activities"]::after {
   content: "";
