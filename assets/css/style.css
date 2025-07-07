@@ -148,21 +148,21 @@
   display: block;
   overflow: visible;
   position: relative;
-  min-height: 650px;
-  padding-bottom: 90px; /* space for buttons/attribution */
+  min-height: 550px;
+  padding-bottom: 60px; /* space for buttons/attribution */
 }
 [data-gyg-widget="availability"]::after {
   content: "";
   display: block;
-  height: 50px; /* additional breathing room */
+  height: 32px; /* additional breathing room */
 }
 @media (max-width: 480px) {
   [data-gyg-widget="availability"] {
-    min-height: 720px;
-    padding-bottom: 110px; /* extra space on small screens */
+    min-height: 650px;
+    padding-bottom: 80px; /* extra space on small screens */
   }
   [data-gyg-widget="availability"]::after {
-    height: 60px;
+    height: 40px;
   }
 }
     .history-section {
