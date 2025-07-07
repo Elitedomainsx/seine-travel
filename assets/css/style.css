@@ -113,11 +113,6 @@
         display: block;
         margin: 0 auto;
       }
-    .gyg-activities {
-      /* allow the widget to define its own height */
-      height: auto;
-      min-height: 1200px;
-    }
     .activities-widget {
       background: linear-gradient(to bottom, #cceeff 0%, #f0f8ff 100%);
       padding: 40px 20px;
@@ -142,20 +137,6 @@
   height: 32px; /* extra breathing room */
 }
 
-@media (max-width: 480px) {
-  [data-gyg-widget="activities"] {
-    padding-bottom: 80px;
-    min-height: 3000px;
-  }
-  [data-gyg-widget="activities"]::after {
-    height: 40px;
-  }
-}
-[data-gyg-widget="activities"] iframe {
-  flex: 1 1 300px;
-  display: block;
-  width: 100%;
-}
 
 /* Ensure availability widget content is never clipped */
 [data-gyg-widget="availability"] {
@@ -257,16 +238,13 @@
         width: 100%;
       }
       [data-gyg-widget="activities"] {
-        overflow-x: auto;
-        flex-wrap: wrap;
-        overflow: visible !important;
-        display: block !important;
+        display: block;
+        overflow: visible;
+        padding-bottom: 80px;
+        min-height: 2200px;
       }
-      .gyg-activities {
-        /* let the widget expand naturally on small screens */
-        height: auto;
-        /* reduce enforced height to avoid large white space */
-        min-height: 1200px;
+      [data-gyg-widget="activities"]::after {
+        height: 40px;
       }
 }
 
