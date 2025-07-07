@@ -241,7 +241,7 @@
         display: block;
         overflow: visible;
         padding-bottom: 80px;
-        min-height: 2200px;
+        min-height: 2600px;
       }
       [data-gyg-widget="activities"]::after {
         height: 40px;
