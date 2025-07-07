@@ -148,7 +148,7 @@
   display: block;
   overflow: visible;
   position: relative;
-  min-height: 550px;
+  min-height: 450px;
   padding-bottom: 60px; /* space for buttons/attribution */
 }
 [data-gyg-widget="availability"]::after {
