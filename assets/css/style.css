@@ -147,20 +147,22 @@
   width: 100%;
   display: block;
   overflow: visible;
-  padding-bottom: 80px; /* space for buttons/attribution */
   position: relative;
+  min-height: 650px;
+  padding-bottom: 90px; /* space for buttons/attribution */
 }
 [data-gyg-widget="availability"]::after {
   content: "";
   display: block;
-  height: 40px; /* additional breathing room */
+  height: 50px; /* additional breathing room */
 }
 @media (max-width: 480px) {
   [data-gyg-widget="availability"] {
-    padding-bottom: 100px; /* extra space on small screens */
+    min-height: 720px;
+    padding-bottom: 110px; /* extra space on small screens */
   }
   [data-gyg-widget="availability"]::after {
-    height: 50px;
+    height: 60px;
   }
 }
     .history-section {
