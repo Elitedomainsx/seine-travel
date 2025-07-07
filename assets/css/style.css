@@ -246,10 +246,10 @@
         display: block !important;
       }
       .gyg-activities {
-        /* allow the widget to size itself on mobile */
+        /* let the widget expand naturally on small screens */
         height: auto;
-        /* ensure full activity list is visible on mobile */
-        min-height: 3200px;
+        /* reduce enforced height to avoid large white space */
+        min-height: 1200px;
       }
 }
 
