@@ -9,7 +9,12 @@
     <loc>https://seine.travel/best-seine-cruises.html</loc>
     <lastmod>2025-07-19</lastmod>
     <priority>0.9</priority>
-  </url>  
+  </url>
+  <url>
+    <loc>https://seine.travel/river-cruise-paris-dinner.html</loc>
+    <lastmod>2025-08-02</lastmod>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://seine.travel/hotels.html</loc>
     <lastmod>2025-07-09</lastmod>
