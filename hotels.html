@@ -67,7 +67,54 @@
                 <hr class="divider divider-light" />
                 <p class="text-white-75 mb-4 text-center">Use our search widget to compare prices, amenities and river views across dozens of properties. Simply set your dates and explore options along the Seine.</p>
                 <div class="d-flex justify-content-center">
-                    <!-- Hotel search form widget -->
+                    <!-- Trip.com hotel search widget -->
+                    <div class="d-flex justify-content-center">
+                      <!-- Versión Desktop -->
+                      <div class="trip-widget-desktop">
+                        <iframe
+                          src="https://www.trip.com/partners/ad/S5808147?Allianceid=7174028&SID=263912251&trip_sub1="
+                          style="width:900px; height:200px; border:none;"
+                          frameborder="0"
+                          scrolling="no"
+                          id="S5808147-desktop">
+                        </iframe>
+                      </div>
+                    
+                      <!-- Versión Mobile -->
+                      <div class="trip-widget-mobile">
+                        <iframe
+                          src="https://www.trip.com/partners/ad/S5808147?Allianceid=7174028&SID=263912251&trip_sub1="
+                          style="width:100%; height:180px; border:none;"
+                          frameborder="0"
+                          scrolling="no"
+                          id="S5808147-mobile">
+                        </iframe>
+                      </div>
+                    </div>
+                    
+                    <style>
+                    /* Desktop visible, mobile oculto */
+                    .trip-widget-desktop {
+                      display: block;
+                    }
+                    .trip-widget-mobile {
+                      display: none;
+                    }
+                    
+                    /* Mostrar versión mobile bajo 768px */
+                    @media (max-width: 768px) {
+                      .trip-widget-desktop {
+                        display: none;
+                      }
+                      .trip-widget-mobile {
+                        display: block;
+                        width: 100%;
+                        max-width: 400px;
+                        margin: auto;
+                      }
+                    }
+                    </style>
+
                     <div style="width:100%; max-width:600px; margin:auto;">
                       <div style="position:relative; width:100%; padding-top:25%;">
                         <iframe
