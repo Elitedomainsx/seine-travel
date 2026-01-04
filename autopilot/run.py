@@ -60,7 +60,7 @@ df.columns = [norm(c) for c in df.columns]
 
 # Map headers (ES/EN variants) -> canonical names
 COLMAP = {
-    "query": ["query", "consulta", "consultas"],
+    "query": ["query", "consulta", "consultas", "consultas principales"],
     "impressions": ["impressions", "impresiones"],
     "clicks": ["clicks", "clics"],
     "ctr": ["ctr"],
@@ -178,5 +178,6 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
 
