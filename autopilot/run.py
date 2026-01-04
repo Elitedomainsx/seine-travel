@@ -17,8 +17,37 @@ MIN_IMPRESSIONS = int(cfg.get("min_impressions", 50))
 with open(STATE_PATH, "r", encoding="utf-8") as f:
     state = json.load(f)
 
-# --- Load GSC export ---
-df = pd.read_excel(GSC_FILE)
+# --- Load GSC export (force correct sheet) ---
+xl = pd.ExcelFile(GSC_FILE)
+
+def norm(s: str) -> str:
+    s = str(s).strip().lower()
+    s = (s.replace("á","a").replace("é","e").replace("í","i")
+           .replace("ó","o").replace("ú","u").replace("ñ","n"))
+    s = re.sub(r"\s+", " ", s)
+    return s
+
+preferred = None
+for sh in xl.sheet_names:
+    if norm(sh) in ("consultas", "queries", "query"):
+        preferred = sh
+        break
+
+if preferred:
+    df = pd.read_excel(GSC_FILE, sheet_name=preferred)
+else:
+    candidate = None
+    for sh in xl.sheet_names:
+        tmp = pd.read_excel(GSC_FILE, sheet_name=sh, nrows=1)
+        cols = [norm(c) for c in tmp.columns]
+        if any(c in ("query", "consulta", "consultas") for c in cols):
+            candidate = sh
+            break
+    if not candidate:
+        raise RuntimeError(f"No sheet with queries found. Sheets: {xl.sheet_names}")
+    df = pd.read_excel(GSC_FILE, sheet_name=candidate)
+
+print(f"[AUTOPILOT] Using GSC sheet: {preferred or candidate}")
 
 def norm(s: str) -> str:
     s = str(s).strip().lower()
@@ -149,4 +178,5 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
