@@ -17,6 +17,27 @@ MIN_IMPRESSIONS = int(cfg.get("min_impressions", 50))
 with open(STATE_PATH, "r", encoding="utf-8") as f:
     state = json.load(f)
 
+from datetime import timezone
+
+def _parse_ts(ts: str):
+    return datetime.fromisoformat(ts.replace("Z", "+00:00"))
+
+def days_since_last_change(state: dict) -> int:
+    hist = state.get("history", [])
+    for item in reversed(hist):
+        if item.get("changed_html") is True and item.get("timestamp_utc"):
+            last = _parse_ts(item["timestamp_utc"])
+            now = datetime.now(timezone.utc)
+            return (now - last).days
+    return 999  # nunca hubo cambios
+
+GUARDRAIL_DAYS = int(cfg.get("guardrail_days", 14))
+days = days_since_last_change(state)
+
+if days < GUARDRAIL_DAYS:
+    print(f"[AUTOPILOT] Guardrail activo: último cambio hace {days} días (< {GUARDRAIL_DAYS}). Abortando.")
+    raise SystemExit(0)
+
 # --- Load GSC export (force correct sheet) ---
 xl = pd.ExcelFile(GSC_FILE)
 
@@ -178,6 +199,7 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
 
 
