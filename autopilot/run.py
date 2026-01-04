@@ -19,12 +19,39 @@ with open(STATE_PATH, "r", encoding="utf-8") as f:
 
 # --- Load GSC export ---
 df = pd.read_excel(GSC_FILE)
-df.columns = [c.strip().lower() for c in df.columns]
+
+def norm(s: str) -> str:
+    s = str(s).strip().lower()
+    s = (s.replace("á","a").replace("é","e").replace("í","i")
+           .replace("ó","o").replace("ú","u").replace("ñ","n"))
+    s = re.sub(r"\s+", " ", s)
+    return s
+
+df.columns = [norm(c) for c in df.columns]
+
+# Map headers (ES/EN variants) -> canonical names
+COLMAP = {
+    "query": ["query", "consulta", "consultas"],
+    "impressions": ["impressions", "impresiones"],
+    "clicks": ["clicks", "clics"],
+    "ctr": ["ctr"],
+    "position": ["position", "posicion", "posición"]
+}
+
+# Build reverse lookup
+rename = {}
+for canonical, variants in COLMAP.items():
+    for v in variants:
+        if v in df.columns:
+            rename[v] = canonical
+            break
+
+df = df.rename(columns=rename)
 
 required = {"query", "impressions", "clicks", "ctr", "position"}
 missing = required - set(df.columns)
 if missing:
-    raise RuntimeError(f"GSC export missing columns: {missing}")
+    raise RuntimeError(f"GSC export missing columns after mapping: {missing}. Found: {list(df.columns)}")
 
 total_impr = float(df["impressions"].sum())
 if total_impr < MIN_IMPRESSIONS:
@@ -122,3 +149,4 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
