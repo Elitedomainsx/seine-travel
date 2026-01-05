@@ -40,7 +40,7 @@ jobs:
         env:
           BYPASS_GUARDRAIL: "1"
         run: |
-          python autopilot/run.py
+          python -m autopilot.run
 
       - name: Commit & push if changed
         run: |
