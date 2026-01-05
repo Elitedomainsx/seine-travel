@@ -91,7 +91,7 @@ def load_gsc_data(path: str):
 
 df = load_gsc_data(GSC_FILE)
 
-print(f"[AUTOPILOT] Using GSC sheet: {preferred or candidate}")
+print(f"[AUTOPILOT] Loaded GSC file: {GSC_FILE}")
 
 def norm(s: str) -> str:
     s = str(s).strip().lower()
@@ -222,6 +222,7 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
 
 
