@@ -12,10 +12,6 @@ jobs:
   autopilot:
     runs-on: ubuntu-latest
 
-    # SOLO para test (sacarlo luego)
-    env:
-      BYPASS_GUARDRAIL: "1"
-
       # Reutilizamos lo que ya tenés
       GSC_CREDENTIALS_JSON: ${{ secrets.GSC_CREDENTIALS_JSON }}
       GSC_DAYS: "28"
