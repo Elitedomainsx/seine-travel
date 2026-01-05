@@ -34,9 +34,16 @@ def days_since_last_change(state: dict) -> int:
 GUARDRAIL_DAYS = int(cfg.get("guardrail_days", 14))
 days = days_since_last_change(state)
 
-if days < GUARDRAIL_DAYS:
+import os
+
+BYPASS_GUARDRAIL = os.environ.get("BYPASS_GUARDRAIL", "0") == "1"
+
+if days < GUARDRAIL_DAYS and not BYPASS_GUARDRAIL:
     print(f"[AUTOPILOT] Guardrail activo: último cambio hace {days} días (< {GUARDRAIL_DAYS}). Abortando.")
     raise SystemExit(0)
+
+if days < GUARDRAIL_DAYS and BYPASS_GUARDRAIL:
+    print(f"[AUTOPILOT] BYPASS_GUARDRAIL=1 (testing). Último cambio hace {days} días, pero continúo.")
 
 def load_gsc_data(path: str):
     if path.lower().endswith(".csv"):
@@ -234,6 +241,7 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
 
 
