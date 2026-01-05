@@ -1,5 +1,5 @@
 {
-  "current_template_index": 2,
+  "current_template_index": 0,
   "last_ctr": 0,
   "history": [
     {
@@ -17,6 +17,15 @@
       "template_index_used": 1,
       "title": "Which Is the Best Seine River Cruises? Honest Paris Comparison",
       "meta": "Not sure which Seine River Cruises to choose? We compare top Paris options to help you decide.",
+      "total_impressions_in_export": 603.0,
+      "changed_html": true
+    },
+    {
+      "timestamp_utc": "2026-01-05T13:56:31.780921Z",
+      "dominant_intent": "comparison",
+      "template_index_used": 2,
+      "title": "Best Seine River Cruises \u2013 Compare Routes, Dining & Prices",
+      "meta": "Looking for the best Seine River Cruises? Compare Paris cruises by route, dining and value.",
       "total_impressions_in_export": 603.0,
       "changed_html": true
     }
