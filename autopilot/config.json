@@ -1,6 +1,7 @@
 {
   "html_path": "best-seine-cruises.html",
-  "gsc_file": "data/best-seine-cruises-gsc.xlsx",
+  "gsc_file": "data/gsc_latest.csv",
   "min_impressions": 50,
   "cycle_days": 14
 }
+
