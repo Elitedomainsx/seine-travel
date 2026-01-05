@@ -12,7 +12,7 @@ jobs:
   autopilot:
     runs-on: ubuntu-latest
 
-      # Reutilizamos lo que ya tenés
+      #1 Reutilizamos lo que ya tenés
       GSC_CREDENTIALS_JSON: ${{ secrets.GSC_CREDENTIALS_JSON }}
       GSC_DAYS: "28"
 
