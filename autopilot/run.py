@@ -40,22 +40,34 @@ if days < GUARDRAIL_DAYS:
 
 def load_gsc_data(path: str):
     if path.lower().endswith(".csv"):
-        df = pd.read_csv(path)
+    df = pd.read_csv(path)
 
-        # Esperamos CSV con columnas: page, query, impressions, clicks, ctr, position
-        required = {"query", "impressions", "clicks", "ctr", "position"}
-        missing = required - set(df.columns)
-        if missing:
-            raise RuntimeError(f"CSV missing columns: {missing}")
+    required = {"page", "query", "impressions", "clicks", "ctr", "position"}
+    missing = required - set(df.columns)
+    if missing:
+        raise RuntimeError(f"CSV missing columns: {missing}")
 
-        # Agregamos por query (formato legacy esperado)
-        df = df.groupby("query", as_index=False).agg(
-            impressions=("impressions", "sum"),
-            clicks=("clicks", "sum"),
-            ctr=("ctr", "mean"),
-            position=("position", "mean"),
-        )
-        return df
+    # Derivar URL objetivo desde el HTML que se está optimizando
+    html = HTML_PATH.lstrip("./")
+    if html in ("index.html", "/"):
+        target_page = "https://seine.travel/"
+    else:
+        target_page = f"https://seine.travel/{html}"
+
+    df = df[df["page"] == target_page].copy()
+
+    print(f"[AUTOPILOT] CSV filtered to page: {target_page} | rows={len(df)}")
+
+    if df.empty:
+        raise RuntimeError(f"No GSC data for target page: {target_page}")
+
+    df = df.groupby("query", as_index=False).agg(
+        impressions=("impressions", "sum"),
+        clicks=("clicks", "sum"),
+        ctr=("ctr", "mean"),
+        position=("position", "mean"),
+    )
+    return df
 
     # ---------- XLSX legacy (tal cual estaba) ----------
     xl = pd.ExcelFile(path)
