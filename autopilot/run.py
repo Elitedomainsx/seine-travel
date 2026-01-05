@@ -47,36 +47,36 @@ if days < GUARDRAIL_DAYS and BYPASS_GUARDRAIL:
 
 def load_gsc_data(path: str):
     if path.lower().endswith(".csv"):
-    df = pd.read_csv(path)
+        df = pd.read_csv(path)
 
-    required = {"page", "query", "impressions", "clicks", "ctr", "position"}
-    missing = required - set(df.columns)
-    if missing:
-        raise RuntimeError(f"CSV missing columns: {missing}")
+        required = {"page", "query", "impressions", "clicks", "ctr", "position"}
+        missing = required - set(df.columns)
+        if missing:
+            raise RuntimeError(f"CSV missing columns: {missing}")
 
-    # Derivar URL objetivo desde el HTML que se está optimizando
-    html = HTML_PATH.lstrip("./")
-    if html in ("index.html", "/"):
-        target_page = "https://seine.travel/"
-    else:
-        target_page = f"https://seine.travel/{html}"
+        # Derivar URL objetivo desde el HTML que se está optimizando
+        html = HTML_PATH.lstrip("./")
+        if html in ("index.html", "/"):
+            target_page = "https://seine.travel/"
+        else:
+            target_page = f"https://seine.travel/{html}"
 
-    df = df[df["page"] == target_page].copy()
+        df = df[df["page"] == target_page].copy()
 
-    print(f"[AUTOPILOT] CSV filtered to page: {target_page} | rows={len(df)}")
+        print(f"[AUTOPILOT] CSV filtered to page: {target_page} | rows={len(df)}")
 
-    if df.empty:
-        raise RuntimeError(f"No GSC data for target page: {target_page}")
+        if df.empty:
+            raise RuntimeError(f"No GSC data for target page: {target_page}")
 
-    df = df.groupby("query", as_index=False).agg(
-        impressions=("impressions", "sum"),
-        clicks=("clicks", "sum"),
-        ctr=("ctr", "mean"),
-        position=("position", "mean"),
-    )
-    return df
+        df = df.groupby("query", as_index=False).agg(
+            impressions=("impressions", "sum"),
+            clicks=("clicks", "sum"),
+            ctr=("ctr", "mean"),
+            position=("position", "mean"),
+        )
+        return df
 
-    # ---------- XLSX legacy (tal cual estaba) ----------
+    # ---------- XLSX legacy (fallback) ----------
     xl = pd.ExcelFile(path)
 
     def norm(s: str) -> str:
@@ -241,6 +241,7 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
 
 
