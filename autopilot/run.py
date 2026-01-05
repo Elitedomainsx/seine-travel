@@ -38,35 +38,58 @@ if days < GUARDRAIL_DAYS:
     print(f"[AUTOPILOT] Guardrail activo: último cambio hace {days} días (< {GUARDRAIL_DAYS}). Abortando.")
     raise SystemExit(0)
 
-# --- Load GSC export (force correct sheet) ---
-xl = pd.ExcelFile(GSC_FILE)
+def load_gsc_data(path: str):
+    if path.lower().endswith(".csv"):
+        df = pd.read_csv(path)
 
-def norm(s: str) -> str:
-    s = str(s).strip().lower()
-    s = (s.replace("á","a").replace("é","e").replace("í","i")
-           .replace("ó","o").replace("ú","u").replace("ñ","n"))
-    s = re.sub(r"\s+", " ", s)
-    return s
+        # Esperamos CSV con columnas: page, query, impressions, clicks, ctr, position
+        required = {"query", "impressions", "clicks", "ctr", "position"}
+        missing = required - set(df.columns)
+        if missing:
+            raise RuntimeError(f"CSV missing columns: {missing}")
 
-preferred = None
-for sh in xl.sheet_names:
-    if norm(sh) in ("consultas", "queries", "query"):
-        preferred = sh
-        break
+        # Agregamos por query (formato legacy esperado)
+        df = df.groupby("query", as_index=False).agg(
+            impressions=("impressions", "sum"),
+            clicks=("clicks", "sum"),
+            ctr=("ctr", "mean"),
+            position=("position", "mean"),
+        )
+        return df
 
-if preferred:
-    df = pd.read_excel(GSC_FILE, sheet_name=preferred)
-else:
-    candidate = None
+    # ---------- XLSX legacy (tal cual estaba) ----------
+    xl = pd.ExcelFile(path)
+
+    def norm(s: str) -> str:
+        s = str(s).strip().lower()
+        s = (s.replace("á","a").replace("é","e").replace("í","i")
+               .replace("ó","o").replace("ú","u").replace("ñ","n"))
+        s = re.sub(r"\s+", " ", s)
+        return s
+
+    preferred = None
     for sh in xl.sheet_names:
-        tmp = pd.read_excel(GSC_FILE, sheet_name=sh, nrows=1)
-        cols = [norm(c) for c in tmp.columns]
-        if any(c in ("query", "consulta", "consultas") for c in cols):
-            candidate = sh
+        if norm(sh) in ("consultas", "queries", "query"):
+            preferred = sh
             break
-    if not candidate:
-        raise RuntimeError(f"No sheet with queries found. Sheets: {xl.sheet_names}")
-    df = pd.read_excel(GSC_FILE, sheet_name=candidate)
+
+    if preferred:
+        df = pd.read_excel(path, sheet_name=preferred)
+    else:
+        candidate = None
+        for sh in xl.sheet_names:
+            tmp = pd.read_excel(path, sheet_name=sh, nrows=1)
+            cols = [norm(c) for c in tmp.columns]
+            if any(c in ("query", "consulta", "consultas") for c in cols):
+                candidate = sh
+                break
+        if not candidate:
+            raise RuntimeError(f"No sheet with queries found. Sheets: {xl.sheet_names}")
+        df = pd.read_excel(path, sheet_name=candidate)
+
+    return df
+
+df = load_gsc_data(GSC_FILE)
 
 print(f"[AUTOPILOT] Using GSC sheet: {preferred or candidate}")
 
@@ -199,6 +222,7 @@ with open(STATE_PATH, "w", encoding="utf-8") as f:
     json.dump(state, f, indent=2)
 
 print(f"Done. intent={dominant_intent}, template={idx}, changed={changed}")
+
 
 
 
