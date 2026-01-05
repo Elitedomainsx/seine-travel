@@ -1,9 +1,9 @@
 name: Seine Autopilot
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
   schedule:
-    - cron: "0 9 * * 1"  # Lunes 09:00 UTC (ajustable)
+    - cron: "0 9 * * 1"
 
 permissions:
   contents: write
@@ -12,7 +12,7 @@ jobs:
   autopilot:
     runs-on: ubuntu-latest
 
-      # Reutilizamos lo que ya tenés
+    env:
       GSC_CREDENTIALS_JSON: ${{ secrets.GSC_CREDENTIALS_JSON }}
       GSC_DAYS: "28"
 
@@ -32,17 +32,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 1) Fetch GSC → crea data/gsc_latest.csv
       - name: Fetch GSC CSV
         run: |
           python autopilot/gsc_fetch.py
 
-      # 2) Autopilot → lee data/gsc_latest.csv y edita HTML + state
       - name: Run autopilot
         run: |
           python autopilot/run.py
 
-      # 3) Commit si cambió algo (incluye CSV nuevo)
       - name: Commit & push if changed
         run: |
           if [ -n "$(git status --porcelain)" ]; then
