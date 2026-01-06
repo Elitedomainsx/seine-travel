@@ -444,7 +444,6 @@ def build_dashboard(
     # ---- Guard: do not overwrite a manually maintained static dashboard ----
     STATIC_SENTINEL = "AUTOPILOT_DASHBOARD_STATIC_V1"
     try:
-        import os
         if os.path.exists(output_html):
             with open(output_html, "r", encoding="utf-8") as fr:
                 if STATIC_SENTINEL in fr.read():
