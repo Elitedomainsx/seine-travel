@@ -4,305 +4,671 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="robots" content="noindex,nofollow"/>
-  <title>Seine.travel Autopilot Dashboard</title>
+  <title>Seine.travel — Autopilot Dashboard</title>
   <style>
-    :root {
-      color-scheme: light dark;
-      --bg: #0b1020;
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.12);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.7);
+    :root{
+      --bg:#0b1020;
+      --card:rgba(255,255,255,0.06);
+      --card2:rgba(255,255,255,0.04);
+      --border:rgba(255,255,255,0.12);
+      --muted:rgba(255,255,255,0.70);
+      --muted2:rgba(255,255,255,0.55);
+      --good:#38d39f;
+      --bad:#ff6b6b;
+      --warn:#f6c177;
+      --link:#8ab4f8;
     }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+    *{box-sizing:border-box}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:#fff; margin:0; padding:22px;
     }
-    header {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 14px;
-      flex-wrap: wrap;
+    a{color:var(--link)}
+    .wrap{max-width:1180px;margin:0 auto}
+    .topbar{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:14px; margin-bottom:14px;
     }
-    h1 { font-size: 18px; margin: 0; }
-    .sub { color: var(--muted); font-size: 13px; }
-    .wrap { padding: 20px; max-width: 1100px; margin: 0 auto; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+    h1{margin:0;font-size:20px;letter-spacing:.2px}
+    .sub{margin:4px 0 0 0;color:var(--muted);font-size:13px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border:1px solid var(--border);
+      background:rgba(255,255,255,.03); border-radius:999px;
+      font-size:12px; color:var(--muted);
+      white-space:nowrap;
     }
-    @media (max-width: 900px) {
-      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--warn)}
+    .dot.good{background:var(--good)}
+    .dot.bad{background:var(--bad)}
+    .grid{
+      display:grid; gap:12px;
+      grid-template-columns:repeat(12, 1fr);
+      margin:14px 0;
     }
-    @media (max-width: 600px) {
-      .cards { grid-template-columns: 1fr; }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      min-height:88px;
     }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
+    .card.small{min-height:76px}
+    .kpi-title{color:var(--muted);font-size:12px;margin:0 0 6px 0}
+    .kpi-val{font-size:28px;margin:0;line-height:1.1}
+    .kpi-sub{margin:8px 0 0 0;color:var(--muted2);font-size:12px}
+    .delta{font-weight:600}
+    .delta.good{color:var(--good)}
+    .delta.bad{color:var(--bad)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .section-title{
+      margin:16px 0 8px 0; font-size:13px; color:var(--muted);
+      letter-spacing:.2px;
     }
-    .kpi-label { color: var(--muted); font-size: 12px; }
-    .kpi-val { font-size: 26px; margin-top: 4px; }
-    .kpi-delta { color: var(--muted); font-size: 12px; margin-top: 2px; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; }
-    .section-title { margin: 18px 0 10px; font-size: 14px; color: var(--muted); }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
+    .row{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      color:var(--muted);
+      font-size:12px;
     }
-    th, td {
-      padding: 10px 10px;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-      font-size: 13px;
-      vertical-align: top;
+    .row strong{color:#fff;font-weight:600}
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:var(--card2);
     }
-    th { color: var(--muted); font-weight: 600; background: rgba(255,255,255,0.03); }
-    tr:last-child td { border-bottom: none; }
-    .best td { outline: 1px solid rgba(255,255,255,0.25); }
-    .trend {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px;
+    th, td{
+      padding:10px 10px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      font-size:12px;
+      text-align:left;
+      vertical-align:top;
     }
-    @media (max-width: 900px) {
-      .trend { grid-template-columns: 1fr; }
+    th{color:var(--muted);font-weight:600}
+    tr:last-child td{border-bottom:none}
+    .right{text-align:right}
+    .muted{color:var(--muted)}
+    .warn{color:var(--warn)}
+    .ok{color:var(--good)}
+    .bad{color:var(--bad)}
+    .spark{
+      width:100%; height:26px; margin-top:8px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:10px;
+      padding:4px;
     }
-    .trend-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 10px 12px;
+    .spark svg{width:100%;height:100%}
+    .note{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
     }
-    .trend-title { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
-    .spark { color: rgba(255,255,255,0.9); }
-    .warn {
-      margin: 12px 0;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,170,0,0.5);
-      background: rgba(255,170,0,0.10);
-      color: rgba(255,255,255,0.9);
+    .col-4{grid-column:span 4}
+    .col-3{grid-column:span 3}
+    .col-6{grid-column:span 6}
+    .col-12{grid-column:span 12}
+    @media (max-width: 980px){
+      .col-4,.col-3,.col-6{grid-column:span 12}
+      .pill{white-space:normal}
     }
-    .meta {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .meta strong { color: var(--text); }
   </style>
 </head>
+
 <body>
-  <header>
+<div class="wrap">
+
+  <div class="topbar">
     <div>
       <h1>Seine.travel — Autopilot Dashboard</h1>
-      <div class="sub">Last cycle: <span class="mono">2026-01-06T22:14:34.257496Z</span> · Next ETA (approx): <span class="mono">2026-01-13T22:14:34.257496Z</span></div>
+      <p class="sub" id="subtitle">Loading…</p>
     </div>
-    <div class="sub">
-      Active: <span class="mono">None</span> · Best: <span class="mono">baseline</span> · Action: <strong>hold</strong>
-    </div>
-  </header>
-
-  <div class="wrap">
-    
-
-    <div class="cards">
-      
-        <div class="card">
-          <div class="kpi-label">Impressions</div>
-          <div class="kpi-val">615</div>
-          <div class="kpi-delta">—</div>
-        </div>
-        
-
-        <div class="card">
-          <div class="kpi-label">GSC Clicks</div>
-          <div class="kpi-val">0</div>
-          <div class="kpi-delta">—</div>
-        </div>
-        
-
-        <div class="card">
-          <div class="kpi-label">Outbound clicks</div>
-          <div class="kpi-val">0</div>
-          <div class="kpi-delta">—</div>
-        </div>
-        
-
-        <div class="card">
-          <div class="kpi-label">Outbound / 1k impr</div>
-          <div class="kpi-val">0.00</div>
-          <div class="kpi-delta">—</div>
-        </div>
-        
-
-        <div class="card">
-          <div class="kpi-label">CTR</div>
-          <div class="kpi-val">0.0000</div>
-          <div class="kpi-delta">—</div>
-        </div>
-        
-
-        <div class="card">
-          <div class="kpi-label">Avg position</div>
-          <div class="kpi-val">57.85</div>
-          <div class="kpi-delta">—</div>
-        </div>
-        
-    </div>
-
-    
-      <div class="trend">
-        <div class="trend-item">
-          <div class="trend-title">Outbound / 1k impr</div>
-          <div class="spark"></div>
-        </div>
-        <div class="trend-item">
-          <div class="trend-title">Outbound clicks</div>
-          <div class="spark"></div>
-        </div>
-        <div class="trend-item">
-          <div class="trend-title">Impressions</div>
-          <div class="spark"></div>
-        </div>
-      </div>
-    
-
-    <div class="meta">
-      <div><strong>Window:</strong> <span class="mono">2025-12-06</span> → <span class="mono">2026-01-03</span></div>
-      <div><strong>Dominant intent (queries):</strong> comparison</div>
-      <div><strong>Chosen title:</strong> -</div>
-      <div><strong>Chosen meta:</strong> -</div>
-    </div>
-
-
-    <div class="section-title">Top queries (latest window)</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Query</th><th>Impr</th><th>Clicks</th><th>CTR</th><th>Pos</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>which seine river cruise is the best</td>
-          <td>137</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>39.53</td>
-        </tr><tr>
-          <td>best seine river cruise</td>
-          <td>133</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>38.27</td>
-        </tr><tr>
-          <td>best seine river cruise paris to normandy</td>
-          <td>56</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>81.09</td>
-        </tr><tr>
-          <td>best river cruise in paris</td>
-          <td>43</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>65.26</td>
-        </tr><tr>
-          <td>best seine river cruise paris</td>
-          <td>40</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>60.50</td>
-        </tr><tr>
-          <td>best paris river cruise</td>
-          <td>40</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>51.20</td>
-        </tr><tr>
-          <td>best seine cruise paris</td>
-          <td>35</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>43.57</td>
-        </tr><tr>
-          <td>best seine river cruises</td>
-          <td>14</td>
-          <td>0</td>
-          <td>0.0000</td>
-          <td>46.29</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="section-title">Variant leaderboard (aggregated)</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Variant</th><th>Intent</th><th>Obs</th><th>Impr</th><th>Outbound</th><th>Outbound/1k</th><th>GSC clicks</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <tr class="best">
-          <td class="mono">baseline</td>
-          <td></td>
-          <td>1</td>
-          <td>615</td>
-          <td>0</td>
-          <td>0.00</td>
-          <td>0</td>
-        </tr>
-        
-      </tbody>
-    </table>
-
-    <div class="section-title">Cycles (latest 30)</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Timestamp (UTC)</th><th>Window</th><th>Action</th><th>Variant</th><th>Impr</th><th>GSC clicks</th><th>Outbound</th><th>Outbound/1k</th><th>CTR</th><th>Pos</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <tr>
-          <td class="mono">2026-01-06T22:14:34.257496Z</td>
-          <td class="mono">2025-12-06 → 2026-01-03</td>
-          <td>hold</td>
-          <td class="mono">None</td>
-          <td>615</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0.00</td>
-          <td>0.0000</td>
-          <td>57.85</td>
-        </tr>
-        
-      </tbody>
-    </table>
-
-    <div class="section-title">Notes</div>
-    <div class="meta">
-      <div>• Dashboard is <strong>noindex</strong> (not meant for SEO).</div>
-      <div>• Primary signal: <strong>Outbound clicks per 1k impressions</strong> (from econ sensor).</div>
-      <div>• Rollback triggers when current variant underperforms best variant by configured drop% (and enough data).</div>
+    <div class="pill" id="statusPill" title="Status">
+      <span class="dot" id="statusDot"></span>
+      <span class="mono" id="statusText">Loading…</span>
     </div>
   </div>
+
+  <div class="grid" id="kpis">
+    <div class="card col-4">
+      <p class="kpi-title">Impressions (GSC window)</p>
+      <p class="kpi-val" id="k_impr">—</p>
+      <p class="kpi-sub" id="k_impr_d">—</p>
+      <div class="spark" id="s_impr"></div>
+    </div>
+
+    <div class="card col-4">
+      <p class="kpi-title">GSC clicks (GSC window)</p>
+      <p class="kpi-val" id="k_gscc">—</p>
+      <p class="kpi-sub" id="k_gscc_d">—</p>
+      <div class="spark" id="s_gscc"></div>
+    </div>
+
+    <div class="card col-4">
+      <p class="kpi-title">Outbound clicks (Eval window)</p>
+      <p class="kpi-val" id="k_out">—</p>
+      <p class="kpi-sub" id="k_out_d">—</p>
+      <div class="spark" id="s_out"></div>
+    </div>
+
+    <div class="card col-3 small">
+      <p class="kpi-title">Outbound / 1k impr (Eval)</p>
+      <p class="kpi-val" style="font-size:22px" id="k_out1k">—</p>
+      <p class="kpi-sub" id="k_out1k_d">—</p>
+    </div>
+
+    <div class="card col-3 small">
+      <p class="kpi-title">CTR (GSC window)</p>
+      <p class="kpi-val" style="font-size:22px" id="k_ctr">—</p>
+      <p class="kpi-sub" id="k_ctr_d">—</p>
+    </div>
+
+    <div class="card col-3 small">
+      <p class="kpi-title">Avg position (GSC window)</p>
+      <p class="kpi-val" style="font-size:22px" id="k_pos">—</p>
+      <p class="kpi-sub" id="k_pos_d">—</p>
+    </div>
+
+    <div class="card col-3 small">
+      <p class="kpi-title">ECON outbound (rolling)</p>
+      <p class="kpi-val" style="font-size:22px" id="k_econ_roll">—</p>
+      <p class="kpi-sub" id="k_econ_roll_d">—</p>
+    </div>
+  </div>
+
+  <div class="card col-12" style="margin-top:12px">
+    <div class="row" id="metaRow">
+      <span><strong>Page:</strong> <span class="mono" id="m_page">—</span></span>
+      <span><strong>GSC window:</strong> <span class="mono" id="m_gscwin">—</span></span>
+      <span><strong>Eval window:</strong> <span class="mono" id="m_evalwin">—</span></span>
+      <span><strong>Dominant intent:</strong> <span class="mono" id="m_intent">—</span></span>
+      <span><strong>Action:</strong> <span class="mono" id="m_action">—</span></span>
+      <span><strong>Active variant:</strong> <span class="mono" id="m_active">—</span></span>
+      <span><strong>Best variant:</strong> <span class="mono" id="m_best">—</span></span>
+      <span><strong>Guardrail:</strong> <span class="mono" id="m_guardrail">—</span></span>
+    </div>
+  </div>
+
+  <p class="section-title">Top queries (latest GSC window)</p>
+  <table id="tbl_queries">
+    <thead>
+      <tr>
+        <th>Query</th>
+        <th class="right">Impr</th>
+        <th class="right">Clicks</th>
+        <th class="right">CTR</th>
+        <th class="right">Pos</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p class="section-title">ECON (rolling 28d) — outbound by id (page attributed)</p>
+  <table id="tbl_econ">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th class="right">Clicks</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p class="section-title">Variant leaderboard (aggregated from cycles)</p>
+  <table id="tbl_variants">
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th>Intent</th>
+        <th class="right">Obs</th>
+        <th class="right">Impr</th>
+        <th class="right">Outbound</th>
+        <th class="right">Outbound/1k</th>
+        <th class="right">GSC clicks</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <p class="section-title">Cycles (latest 30)</p>
+  <table id="tbl_cycles">
+    <thead>
+      <tr>
+        <th>Timestamp (UTC)</th>
+        <th>Window</th>
+        <th>Action</th>
+        <th>Variant</th>
+        <th class="right">Impr</th>
+        <th class="right">GSC clicks</th>
+        <th class="right">Outbound</th>
+        <th class="right">Outbound/1k</th>
+        <th class="right">CTR</th>
+        <th class="right">Pos</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="note">
+    <ul style="margin:10px 0 0 18px;padding:0">
+      <li>Dashboard is <span class="mono">noindex</span> (not meant for SEO).</li>
+      <li><strong>Primary economic signal:</strong> Outbound clicks per 1k impressions (Eval window).</li>
+      <li><strong>GSC window</strong> is typically rolling 28d (with lag), used for stability/health.</li>
+      <li><strong>ECON rolling</strong> is computed from the sensor CSV (real-time) to avoid GSC lag confusion.</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const fmt = (n, d=0) => (n === null || n === undefined || Number.isNaN(Number(n))) ? "—" : Number(n).toFixed(d);
+  const fmtInt = (n) => (n === null || n === undefined || Number.isNaN(Number(n))) ? "—" : String(Math.round(Number(n)));
+  const pct = (n, d=2) => (n === null || n === undefined || Number.isNaN(Number(n))) ? "—" : (Number(n)*100).toFixed(d) + "%";
+  const byId = (id) => document.getElementById(id);
+
+  // Paths relative to /dashboard/
+  const ROOT = "..";
+  const PATHS = {
+    latest: `${ROOT}/autopilot/logs/latest_cycle.json`,
+    cycles: `${ROOT}/autopilot/logs/cycles.jsonl`,
+    state: `${ROOT}/autopilot/state.json`,
+    config: `${ROOT}/autopilot/config.json`,
+    econCsv: `${ROOT}/data/econ_clicks_latest.csv`,
+  };
+
+  async function fetchText(url){
+    const r = await fetch(url, {cache:"no-store"});
+    if(!r.ok) throw new Error(`Fetch failed ${r.status}: ${url}`);
+    return await r.text();
+  }
+  async function fetchJson(url){
+    const t = await fetchText(url);
+    return JSON.parse(t);
+  }
+
+  function parseJsonl(text){
+    const lines = text.split("\n").map(l=>l.trim()).filter(Boolean);
+    const out = [];
+    for(const l of lines){
+      try { out.push(JSON.parse(l)); } catch(e) {}
+    }
+    // sort by timestamp_utc
+    out.sort((a,b)=> String(a.timestamp_utc||"").localeCompare(String(b.timestamp_utc||"")));
+    return out;
+  }
+
+  function parseCsv(text){
+    // Simple CSV parser (handles commas, quoted fields minimally)
+    const rows = [];
+    let row = [], cur = "", inQ = false;
+    for(let i=0;i<text.length;i++){
+      const ch = text[i];
+      const nx = text[i+1];
+      if(ch === '"' && inQ && nx === '"'){ cur += '"'; i++; continue; }
+      if(ch === '"'){ inQ = !inQ; continue; }
+      if(ch === "," && !inQ){ row.push(cur); cur=""; continue; }
+      if((ch === "\n" || ch === "\r") && !inQ){
+        if(cur.length || row.length){ row.push(cur); rows.push(row); }
+        row=[]; cur="";
+        continue;
+      }
+      cur += ch;
+    }
+    if(cur.length || row.length){ row.push(cur); rows.push(row); }
+    if(rows.length === 0) return {header:[], data:[]};
+    const header = rows[0].map(h=>h.trim());
+    const data = rows.slice(1).map(r=>{
+      const obj = {};
+      header.forEach((h, idx)=> obj[h] = (r[idx] ?? "").trim());
+      return obj;
+    });
+    return {header, data};
+  }
+
+  function makeDelta(cur, prev, type="num"){
+    if(prev === null || prev === undefined || Number.isNaN(Number(prev))) return {text:"—", cls:""};
+    if(cur === null || cur === undefined || Number.isNaN(Number(cur))) return {text:"—", cls:""};
+    const c = Number(cur), p = Number(prev);
+    const diff = c - p;
+    if(diff === 0) return {text:"0", cls:""};
+    const up = diff > 0;
+    const arrow = up ? "▲" : "▼";
+    let txt = "";
+    if(type === "pct"){
+      txt = `${arrow} ${(diff*100).toFixed(2)}%`;
+    } else if(type === "int"){
+      txt = `${arrow} ${Math.round(diff)}`;
+    } else {
+      txt = `${arrow} ${diff.toFixed(2)}`;
+    }
+    return {text:txt, cls: up ? "good" : "bad"};
+  }
+
+  function sparkline(el, values){
+    const clean = values.map(v=>Number(v)).filter(v=>Number.isFinite(v));
+    if(clean.length < 2){ el.innerHTML = `<div class="muted" style="font-size:11px;padding:2px 4px">—</div>`; return; }
+    const min = Math.min(...clean), max = Math.max(...clean);
+    const W = 100, H = 18, pad = 2;
+    const norm = (x) => (max === min) ? (H/2) : (H - pad - ((x-min)/(max-min))*(H-2*pad));
+    const step = (W-2*pad) / (clean.length-1);
+    let pts = "";
+    clean.forEach((v,i)=>{
+      const x = pad + i*step;
+      const y = norm(v);
+      pts += `${x.toFixed(2)},${y.toFixed(2)} `;
+    });
+    el.innerHTML = `
+      <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+        <polyline fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" points="${pts.trim()}"></polyline>
+      </svg>
+    `;
+  }
+
+  function setStatus({action, can_change, best, active}){
+    const pill = byId("statusPill");
+    const dot = byId("statusDot");
+    const txt = byId("statusText");
+
+    const a = action || "unknown";
+    const cc = !!can_change;
+
+    let label = `Action:${a} · can_change:${cc ? "true":"false"} · best:${best ?? "—"} · active:${active ?? "—"}`;
+    txt.textContent = label;
+
+    dot.classList.remove("good","bad");
+    dot.classList.add(cc ? "good" : "");
+    if(a === "rollback") dot.classList.add("bad");
+  }
+
+  function safeGet(obj, path, def=null){
+    try{
+      return path.split(".").reduce((o,k)=> (o && (k in o)) ? o[k] : undefined, obj) ?? def;
+    }catch(e){ return def; }
+  }
+
+  function guessLastChangeUtc(state){
+    // compatible with different state schemas
+    return state?.last_change_utc
+      || state?.last_changed_utc
+      || state?.last_change
+      || state?.last_changed
+      || null;
+  }
+
+  function daysBetween(aIso, bIso){
+    const a = new Date(aIso);
+    const b = new Date(bIso);
+    const ms = b - a;
+    return ms / (1000*60*60*24);
+  }
+
+  function renderTableQueries(rows){
+    const tb = byId("tbl_queries").querySelector("tbody");
+    tb.innerHTML = "";
+    (rows || []).forEach(r=>{
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${escapeHtml(r.query || "")}</td>
+        <td class="right">${fmtInt(r.impressions)}</td>
+        <td class="right">${fmtInt(r.clicks)}</td>
+        <td class="right">${pct(r.ctr,2)}</td>
+        <td class="right">${fmt(r.position,2)}</td>
+      `;
+      tb.appendChild(tr);
+    });
+    if(!rows || rows.length === 0){
+      tb.innerHTML = `<tr><td colspan="5" class="muted">No query rows found.</td></tr>`;
+    }
+  }
+
+  function renderCycles(cycles){
+    const tb = byId("tbl_cycles").querySelector("tbody");
+    tb.innerHTML = "";
+    const last30 = cycles.slice(-30).reverse();
+    for(const c of last30){
+      const m = c.metrics || {};
+      const chosen = c.chosen || {};
+      const v = chosen.variant_key ?? chosen.variant ?? "None";
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="mono">${escapeHtml(String(c.timestamp_utc || ""))}</td>
+        <td class="mono">${escapeHtml(String(safeGet(c,"window.start","")))} → ${escapeHtml(String(safeGet(c,"window.end","")))}</td>
+        <td class="mono">${escapeHtml(String(c.action || ""))}</td>
+        <td class="mono">${escapeHtml(String(v))}</td>
+        <td class="right">${fmtInt(m.impressions)}</td>
+        <td class="right">${fmtInt(m.gsc_clicks)}</td>
+        <td class="right">${fmtInt(m.outbound_clicks)}</td>
+        <td class="right">${fmt(m.outbound_per_1k_impr,2)}</td>
+        <td class="right">${fmt(m.gsc_ctr,4)}</td>
+        <td class="right">${fmt(m.gsc_position,2)}</td>
+      `;
+      tb.appendChild(tr);
+    }
+    if(last30.length === 0){
+      tb.innerHTML = `<tr><td colspan="10" class="muted">No cycles yet. Wait for autopilot to commit logs.</td></tr>`;
+    }
+  }
+
+  function renderVariants(cycles){
+    const agg = new Map();
+    for(const c of cycles){
+      const chosen = c.chosen || {};
+      const variant = chosen.variant_key ?? chosen.variant ?? null;
+      const intent = chosen.intent ?? c.dominant_intent ?? "";
+      if(!variant) continue;
+      const m = c.metrics || {};
+      const key = `${variant}||${intent}`;
+      if(!agg.has(key)){
+        agg.set(key, {variant, intent, obs:0, impr:0, outbound:0, out1k:0, gsc:0});
+      }
+      const a = agg.get(key);
+      a.obs += 1;
+      a.impr += Number(m.impressions || 0);
+      a.outbound += Number(m.outbound_clicks || 0);
+      a.gsc += Number(m.gsc_clicks || 0);
+      // out1k aggregated at the end
+    }
+    const rows = Array.from(agg.values()).map(r=>{
+      r.out1k = (r.impr > 0) ? (r.outbound / r.impr * 1000) : 0;
+      return r;
+    }).sort((a,b)=> b.out1k - a.out1k);
+
+    const tb = byId("tbl_variants").querySelector("tbody");
+    tb.innerHTML = "";
+    for(const r of rows){
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="mono">${escapeHtml(r.variant)}</td>
+        <td class="mono">${escapeHtml(r.intent || "")}</td>
+        <td class="right">${fmtInt(r.obs)}</td>
+        <td class="right">${fmtInt(r.impr)}</td>
+        <td class="right">${fmtInt(r.outbound)}</td>
+        <td class="right">${fmt(r.out1k,2)}</td>
+        <td class="right">${fmtInt(r.gsc)}</td>
+      `;
+      tb.appendChild(tr);
+    }
+    if(rows.length === 0){
+      tb.innerHTML = `<tr><td colspan="7" class="muted">No variants observed yet (still in hold/guardrail). This will fill once explore starts.</td></tr>`;
+    }
+  }
+
+  function renderEconById(obj){
+    const tb = byId("tbl_econ").querySelector("tbody");
+    tb.innerHTML = "";
+    const entries = Object.entries(obj || {}).sort((a,b)=> (b[1]||0)-(a[1]||0));
+    for(const [id, cnt] of entries){
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="mono">${escapeHtml(String(id))}</td>
+        <td class="right">${fmtInt(cnt)}</td>
+      `;
+      tb.appendChild(tr);
+    }
+    if(entries.length === 0){
+      tb.innerHTML = `<tr><td colspan="2" class="muted">No ECON clicks attributed for this page (rolling 28d).</td></tr>`;
+    }
+  }
+
+  function escapeHtml(s){
+    return String(s)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  async function main(){
+    // Load latest first (fast feedback)
+    const latest = await fetchJson(PATHS.latest);
+
+    // Optional files
+    let cfg = null, state = null, cycles = [];
+    try { cfg = await fetchJson(PATHS.config); } catch(e) {}
+    try { state = await fetchJson(PATHS.state); } catch(e) {}
+
+    try {
+      const cyText = await fetchText(PATHS.cycles);
+      cycles = parseJsonl(cyText);
+    } catch(e) {
+      cycles = [];
+    }
+
+    // Subtitle
+    const ts = latest.timestamp_utc;
+    const guardrailDays = Number(cfg?.guardrail_days ?? 7);
+    let eta = "—";
+    try{
+      const d = new Date(ts);
+      d.setUTCDate(d.getUTCDate() + guardrailDays);
+      eta = d.toISOString().replace(".000Z","Z");
+    }catch(e){}
+    byId("subtitle").textContent = `Last cycle: ${ts} · Next ETA (approx): ${eta}`;
+
+    // Status pill
+    const action = latest.action;
+    const canChange = !!latest.can_change;
+    const best = latest.best_variant_key;
+    const active = safeGet(latest,"chosen.variant_key", null);
+    setStatus({action, can_change:canChange, best, active});
+
+    // Guardrail info
+    let guardTxt = canChange ? "OFF" : "ON";
+    let lastChangeUtc = state ? guessLastChangeUtc(state) : null;
+    if(lastChangeUtc){
+      const days = daysBetween(lastChangeUtc, ts);
+      guardTxt = `${guardTxt} · last change: ${days.toFixed(1)}d ago · guardrail: ${guardrailDays}d`;
+    }
+    byId("m_guardrail").textContent = guardTxt;
+
+    // Meta row
+    byId("m_page").textContent = latest.page || "—";
+    byId("m_gscwin").textContent = `${safeGet(latest,"window.start","—")} → ${safeGet(latest,"window.end","—")}`;
+    // “Eval window”: if state has last change window, show it; else fallback to latest.window
+    const evalStart = safeGet(latest,"window.start","—");
+    const evalEnd = safeGet(latest,"window.end","—");
+    byId("m_evalwin").textContent = `${evalStart} → ${evalEnd}`;
+    byId("m_intent").textContent = latest.dominant_intent || "—";
+    byId("m_action").textContent = action || "—";
+    byId("m_active").textContent = active ?? "None";
+    byId("m_best").textContent = best ?? "—";
+
+    // KPIs
+    const m = latest.metrics || {};
+    byId("k_impr").textContent = fmtInt(m.impressions);
+    byId("k_gscc").textContent = fmtInt(m.gsc_clicks);
+    byId("k_out").textContent = fmtInt(m.outbound_clicks);
+    byId("k_out1k").textContent = fmt(m.outbound_per_1k_impr,2);
+    byId("k_ctr").textContent = fmt(m.gsc_ctr,4);
+    byId("k_pos").textContent = fmt(m.gsc_position,2);
+
+    // Deltas vs previous cycle (if any)
+    let prev = null;
+    if(cycles.length >= 2){
+      prev = cycles[cycles.length - 2];
+    }
+    const pm = prev?.metrics || {};
+    const dImpr = makeDelta(m.impressions, pm.impressions, "int");
+    const dGsc = makeDelta(m.gsc_clicks, pm.gsc_clicks, "int");
+    const dOut = makeDelta(m.outbound_clicks, pm.outbound_clicks, "int");
+    const dOut1k = makeDelta(m.outbound_per_1k_impr, pm.outbound_per_1k_impr, "num");
+    const dCtr = makeDelta(m.gsc_ctr, pm.gsc_ctr, "num");
+    const dPos = makeDelta(m.gsc_position, pm.gsc_position, "num");
+
+    byId("k_impr_d").innerHTML = prev ? `Δ <span class="delta ${dImpr.cls}">${dImpr.text}</span>` : "—";
+    byId("k_gscc_d").innerHTML = prev ? `Δ <span class="delta ${dGsc.cls}">${dGsc.text}</span>` : "—";
+    byId("k_out_d").innerHTML = prev ? `Δ <span class="delta ${dOut.cls}">${dOut.text}</span>` : "—";
+    byId("k_out1k_d").innerHTML = prev ? `Δ <span class="delta ${dOut1k.cls}">${dOut1k.text}</span>` : "—";
+    byId("k_ctr_d").innerHTML = prev ? `Δ <span class="delta ${dCtr.cls}">${dCtr.text}</span>` : "—";
+    byId("k_pos_d").innerHTML = prev ? `Δ <span class="delta ${dPos.cls}">${dPos.text}</span>` : "—";
+
+    // Sparklines from cycles
+    const last30 = cycles.slice(-30);
+    sparkline(byId("s_impr"), last30.map(c=> (c.metrics||{}).impressions ?? 0));
+    sparkline(byId("s_gscc"), last30.map(c=> (c.metrics||{}).gsc_clicks ?? 0));
+    sparkline(byId("s_out"), last30.map(c=> (c.metrics||{}).outbound_clicks ?? 0));
+
+    // Tables
+    renderTableQueries(latest.top_queries || []);
+    renderCycles(cycles);
+    renderVariants(cycles);
+
+    // ECON rolling (real-time) — parse CSV and attribute to current page
+    let econRolling28 = 0, econRolling7 = 0;
+    let econById28 = {};
+    try{
+      const csvText = await fetchText(PATHS.econCsv);
+      const {data: rows} = parseCsv(csvText);
+
+      const page = String(latest.page || "");
+      const pageNeedle = page.includes("http") ? page : page; // already full URL in your logs
+      const now = new Date();
+      const ms28 = 28 * 24 * 60 * 60 * 1000;
+      const ms7  = 7  * 24 * 60 * 60 * 1000;
+
+      for(const r of rows){
+        const tsIso = r.timestamp_utc || r.timestamp || r.time || r.date || "";
+        const ref = r.ref || "";
+        const id = r.id || "unknown";
+        const dt = new Date(tsIso);
+        if(!tsIso || isNaN(dt.getTime())) continue;
+
+        // attribute to page: substring match
+        if(pageNeedle && ref && !String(ref).includes(pageNeedle)) continue;
+
+        const age = now - dt;
+        if(age <= ms28){
+          econRolling28 += 1;
+          econById28[id] = (econById28[id] || 0) + 1;
+        }
+        if(age <= ms7){
+          econRolling7 += 1;
+        }
+      }
+    }catch(e){
+      // ignore
+    }
+
+    byId("k_econ_roll").textContent = `${econRolling28} / 28d`;
+    byId("k_econ_roll_d").textContent = `${econRolling7} / 7d`;
+    renderEconById(econById28);
+
+  }
+
+  main().catch(err=>{
+    byId("subtitle").textContent = "Dashboard error: " + err.message;
+    byId("statusText").textContent = "Error loading dashboard files";
+    byId("statusDot").classList.add("bad");
+  });
+
+})();
+</script>
+
 </body>
 </html>
