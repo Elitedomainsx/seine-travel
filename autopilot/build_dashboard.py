@@ -441,5 +441,17 @@ def build_dashboard(
 </body>
 </html>
 """
+    # ---- Guard: do not overwrite a manually maintained static dashboard ----
+    STATIC_SENTINEL = "AUTOPILOT_DASHBOARD_STATIC_V1"
+    try:
+        import os
+        if os.path.exists(output_html):
+            with open(output_html, "r", encoding="utf-8") as fr:
+                if STATIC_SENTINEL in fr.read():
+                    print("[DASHBOARD] Static dashboard detected. Skipping overwrite.")
+                    return
+    except Exception as e:
+        print(f"[DASHBOARD] Sentinel check failed (will overwrite): {e}")
+
     with open(output_html, "w", encoding="utf-8") as f:
         f.write(html)
