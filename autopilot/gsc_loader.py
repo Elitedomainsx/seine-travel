@@ -1,5 +1,6 @@
 # autopilot/gsc_loader.py
 import pandas as pd
+from pandas.errors import EmptyDataError
 import re
 
 def _norm(s: str) -> str:
@@ -11,7 +12,12 @@ def _norm(s: str) -> str:
 
 def load_gsc_data(path: str, html_path: str, base_url: str):
     if path.lower().endswith(".csv"):
-        df = pd.read_csv(path)
+        try:
+    df = pd.read_csv(path)
+except EmptyDataError:
+    # GSC can legitimately return 0 rows for very recent dates (data lag) or low-traffic periods.
+    # Return an empty dataframe with the expected schema so the autopilot can HOLD safely.
+    return pd.DataFrame(columns=["page", "query", "impressions", "clicks", "ctr", "position"])
 
         required = {"page", "query", "impressions", "clicks", "ctr", "position"}
         missing = required - set(df.columns)

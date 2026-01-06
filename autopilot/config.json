@@ -8,13 +8,15 @@
   "min_impressions_to_change": 120,
   "guardrail_days": 7,
   "eval_min_impressions": 120,
-  "eval_min_outbound_clicks": 4,
-  "rollback_drop_pct": 0.50,
+  "eval_min_outbound_clicks": 2,
+  "rollback_drop_pct": 0.35,
   "explore_every_n_changes": 1,
   "topic": "Seine River Cruises",
   "city": "Paris",
   "year": "2026",
   "prefer_best_intent": true,
   "intent_switch_margin_pct": 0.15,
-  "best_intent_min_outbound_clicks": 3
+  "best_intent_min_outbound_clicks": 3,
+  "gsc_lag_days": 3,
+  "gsc_fallback_days": 28
 }
