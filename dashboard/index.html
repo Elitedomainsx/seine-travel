@@ -386,7 +386,7 @@
     txt.textContent = label;
 
     dot.classList.remove("good","bad");
-    dot.classList.add(cc ? "good" : "");
+    if (cc) dot.classList.add("good");
     if(a === "rollback") dot.classList.add("bad");
   }
 
