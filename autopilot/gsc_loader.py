@@ -3,6 +3,8 @@ import pandas as pd
 from pandas.errors import EmptyDataError
 import re
 
+EXPECTED = ["query", "impressions", "clicks", "ctr", "position"]
+
 def _norm(s: str) -> str:
     s = str(s).strip().lower()
     s = (s.replace("á","a").replace("é","e").replace("í","i")
@@ -10,21 +12,29 @@ def _norm(s: str) -> str:
     s = re.sub(r"\s+", " ", s)
     return s
 
-def load_gsc_data(path: str, html_path: str, base_url: str):
-    if path.lower().endswith(".csv"):
+def _empty_df():
+    return pd.DataFrame(columns=EXPECTED)
+
+def load_gsc_data(path: str, html_path: str, base_url: str) -> pd.DataFrame:
+    # ---- CSV path (new) ----
+    if str(path).lower().endswith(".csv"):
         try:
-    df = pd.read_csv(path)
-except EmptyDataError:
-    # GSC can legitimately return 0 rows for very recent dates (data lag) or low-traffic periods.
-    # Return an empty dataframe with the expected schema so the autopilot can HOLD safely.
-    return pd.DataFrame(columns=["page", "query", "impressions", "clicks", "ctr", "position"])
+            df = pd.read_csv(path)
+        except FileNotFoundError:
+            return _empty_df()
+        except EmptyDataError:
+            # CSV vacío es válido (lag de GSC / poco tráfico)
+            return _empty_df()
+
+        if df is None or df.empty:
+            return _empty_df()
 
         required = {"page", "query", "impressions", "clicks", "ctr", "position"}
         missing = required - set(df.columns)
         if missing:
-            raise RuntimeError(f"CSV missing columns: {missing}")
+            raise RuntimeError(f"CSV missing columns: {missing}. Found: {list(df.columns)}")
 
-        html = html_path.lstrip("./")
+        html = str(html_path).lstrip("./")
         if html in ("index.html", "/"):
             target_page = base_url
         else:
@@ -33,19 +43,28 @@ except EmptyDataError:
         df = df[df["page"] == target_page].copy()
         print(f"[AUTOPILOT] CSV filtered to page: {target_page} | rows={len(df)}")
 
+        # Si no hay filas, NO rompemos: devolvemos vacío para que el autopilot haga HOLD.
         if df.empty:
-            raise RuntimeError(f"No GSC data for target page: {target_page}")
+            return _empty_df()
 
-        df = df.groupby("query", as_index=False).agg(
+        out = df.groupby("query", as_index=False).agg(
             impressions=("impressions", "sum"),
             clicks=("clicks", "sum"),
             ctr=("ctr", "mean"),
             position=("position", "mean"),
         )
-        return df
 
-    # ---------- XLSX legacy (fallback) ----------
-    xl = pd.ExcelFile(path)
+        # asegurar esquema
+        for c in EXPECTED:
+            if c not in out.columns:
+                out[c] = None
+        return out[EXPECTED]
+
+    # ---- XLSX legacy (fallback) ----
+    try:
+        xl = pd.ExcelFile(path)
+    except FileNotFoundError:
+        return _empty_df()
 
     preferred = None
     for sh in xl.sheet_names:
@@ -67,6 +86,9 @@ except EmptyDataError:
             raise RuntimeError(f"No sheet with queries found. Sheets: {xl.sheet_names}")
         df = pd.read_excel(path, sheet_name=candidate)
 
+    if df is None or df.empty:
+        return _empty_df()
+
     df.columns = [_norm(c) for c in df.columns]
 
     COLMAP = {
@@ -74,7 +96,7 @@ except EmptyDataError:
         "impressions": ["impressions", "impresiones"],
         "clicks": ["clicks", "clics"],
         "ctr": ["ctr"],
-        "position": ["position", "posicion", "posición"]
+        "position": ["position", "posicion", "posición"],
     }
 
     rename = {}
@@ -86,9 +108,8 @@ except EmptyDataError:
 
     df = df.rename(columns=rename)
 
-    required = {"query", "impressions", "clicks", "ctr", "position"}
-    missing = required - set(df.columns)
+    missing = set(EXPECTED) - set(df.columns)
     if missing:
         raise RuntimeError(f"GSC export missing columns after mapping: {missing}. Found: {list(df.columns)}")
 
-    return df
+    return df[EXPECTED]
