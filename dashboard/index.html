@@ -132,6 +132,10 @@
       <span class="dot" id="statusDot"></span>
       <span class="mono" id="statusText">Loading…</span>
     </div>
+    <div class="pill" id="healthPill" title="Health">
+      <span class="dot" id="healthDot"></span>
+      <span class="mono" id="healthText">Health: …</span>
+    </div>    
   </div>
 
   <div class="grid" id="kpis">
@@ -559,6 +563,21 @@
     const active = safeGet(latest,"chosen.variant_key", null);
     setStatus({action, can_change:canChange, best, active});
 
+    // ---- Health ----
+    const now = new Date();
+    const last = new Date(ts);
+    const staleDays = (now - last) / (1000*60*60*24);
+
+    let health = "OK";
+    let hClass = "good";
+
+    // Heurística simple: tu schedule es cada ~14d, así que >16d = degraded, >21d = broken
+    if (staleDays > 21) { health = "BROKEN"; hClass = "bad"; }
+    else if (staleDays > 16) { health = "DEGRADED"; hClass = ""; } // "" deja el dot en warn (default)
+
+    // Si ECON está habilitado pero no pudimos leer el CSV => degraded
+    // (usa una bandera que seteamos abajo)
+
     // Guardrail info
     let guardTxt = canChange ? "OFF" : "ON";
     let lastChangeUtc = state ? guessLastChangeUtc(state) : null;
@@ -623,12 +642,13 @@
     // ECON rolling (real-time) — parse CSV and attribute to current page
     let econRolling28 = 0, econRolling7 = 0;
     let econById28 = {};
+    let econCsvOk = true;
+
     try{
       const csvText = await fetchText(PATHS.econCsv);
       const {data: rows} = parseCsv(csvText);
 
-      const page = String(latest.page || "");
-      const pageNeedle = page.includes("http") ? page : page; // already full URL in your logs
+      const pageNeedle = String(latest.page || ""); // viene full URL en tu sistema
       const now = new Date();
       const ms28 = 28 * 24 * 60 * 60 * 1000;
       const ms7  = 7  * 24 * 60 * 60 * 1000;
@@ -640,7 +660,7 @@
         const dt = new Date(tsIso);
         if(!tsIso || isNaN(dt.getTime())) continue;
 
-        // attribute to page: substring match
+        // atributo a la page (match por substring)
         if(pageNeedle && ref && !String(ref).includes(pageNeedle)) continue;
 
         const age = now - dt;
@@ -652,13 +672,24 @@
           econRolling7 += 1;
         }
       }
-    }catch(e){
-      // ignore
+    } catch(e){
+      econCsvOk = false;
     }
 
     byId("k_econ_roll").textContent = `${econRolling28} / 28d`;
     byId("k_econ_roll_d").textContent = `${econRolling7} / 7d`;
     renderEconById(econById28);
+
+    // Si ECON está habilitado pero no pudimos leer CSV => degraded
+    if (latest.econ_enabled && !econCsvOk && health !== "BROKEN") {
+      health = "DEGRADED";
+      hClass = "";
+    }
+
+    // Render Health pill (hacerlo acá al final, ya con econCsvOk)
+    byId("healthText").textContent = `Health: ${health}`;
+    byId("healthDot").classList.remove("good","bad");
+    if (hClass) byId("healthDot").classList.add(hClass);
 
   }
 
