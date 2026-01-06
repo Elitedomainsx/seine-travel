@@ -1,7 +1,20 @@
 {
+  "base_url": "https://seine.travel/",
   "html_path": "best-seine-cruises.html",
   "gsc_file": "data/gsc_latest.csv",
-  "min_impressions": 50,
-  "cycle_days": 14
+  "gsc_site_url": "sc-domain:seine.travel",
+  "econ_spreadsheet_id": "1mwRB4-Ooe0C9aiQH1IwysdzazMOo56BtKT-9F-qRot4",
+  "econ_csv": "data/econ_clicks_latest.csv",
+  "min_impressions_to_change": 120,
+  "guardrail_days": 7,
+  "eval_min_impressions": 120,
+  "eval_min_outbound_clicks": 4,
+  "rollback_drop_pct": 0.50,
+  "explore_every_n_changes": 1,
+  "topic": "Seine River Cruises",
+  "city": "Paris",
+  "year": "2026",
+  "prefer_best_intent": true,
+  "intent_switch_margin_pct": 0.15,
+  "best_intent_min_outbound_clicks": 3
 }
-
