@@ -136,25 +136,27 @@ def main():
     # ---------------- evaluation window ----------------
     start_d, end_d = _eval_window(state, cfg)
 
-# If we are inside guardrail, we don't need a "pure" window (no variant changes allowed anyway).
-# Use a rolling window to populate dashboard and avoid empty/lagged single-day ranges.
-if not can_change:
-    fallback_days = int(cfg.get("gsc_fallback_days", 28))
-    end_d = date.today() - timedelta(days=int(cfg.get("gsc_lag_days", 3)))
-    start_d = end_d - timedelta(days=fallback_days)
-    # ---------------- fetch GSC for that window ----------------
-    gsc_service = build_gsc_service()
-    df_gsc_raw = fetch_gsc_range(gsc_service, site_url=gsc_site_url, start_date=start_d, end_date=end_d)
-# If GSC returns 0 rows (common due to GSC lag or very narrow windows), refetch a rolling window for observability.
-if len(df_gsc_raw) == 0:
+    # If we are inside guardrail, use a rolling window for dashboard/observability.
     fallback_days = int(cfg.get("gsc_fallback_days", 28))
     lag_days = int(cfg.get("gsc_lag_days", 3))
-    end2 = date.today() - timedelta(days=lag_days)
-    start2 = end2 - timedelta(days=fallback_days)
-    if (start2, end2) != (start_d, end_d):
-        print(f"[GSC] 0 rows for {start_d}..{end_d}. Refetching rolling window {start2}..{end2} for dashboard.")
-        df_gsc_raw = fetch_gsc_range(gsc_service, site_url=gsc_site_url, start_date=start2, end_date=end2)
-        start_d, end_d = start2, end2
+
+    if not can_change:
+        end_d = date.today() - timedelta(days=lag_days)
+        start_d = end_d - timedelta(days=fallback_days)
+
+    # ---------------- fetch GSC for window ----------------
+    gsc_service = build_gsc_service()
+    df_gsc_raw = fetch_gsc_range(gsc_service, site_url=gsc_site_url, start_date=start_d, end_date=end_d)
+
+    # If GSC returns 0 rows (lag / narrow window), refetch rolling window for observability
+    if len(df_gsc_raw) == 0:
+        end2 = date.today() - timedelta(days=lag_days)
+        start2 = end2 - timedelta(days=fallback_days)
+        if (start2, end2) != (start_d, end_d):
+            print(f"[GSC] 0 rows for {start_d}..{end_d}. Refetching rolling window {start2}..{end2}.")
+            df_gsc_raw = fetch_gsc_range(gsc_service, site_url=gsc_site_url, start_date=start2, end_date=end2)
+            start_d, end_d = start2, end2
+
     os.makedirs("data", exist_ok=True)
     df_gsc_raw.to_csv(gsc_file, index=False)
     print(f"[GSC] Saved {len(df_gsc_raw)} rows to {gsc_file} ({start_d}..{end_d})")
