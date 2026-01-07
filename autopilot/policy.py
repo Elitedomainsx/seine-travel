@@ -7,10 +7,15 @@ def _parse_ts(ts: str):
 def days_since_last_change(state: dict) -> int:
     hist = state.get("history", [])
     for item in reversed(hist):
+        # Ignorar el seed inicial (no queremos que bloquee el primer explore real)
+        if item.get("action") == "baseline_seed":
+            continue
+
         if item.get("changed_html") is True and item.get("timestamp_utc"):
             last = _parse_ts(item["timestamp_utc"])
             now = datetime.now(timezone.utc)
             return (now - last).days
+
     return 999
 
 def guardrail_check(days: int, guardrail_days: int, bypass: bool) -> None:
