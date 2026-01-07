@@ -661,7 +661,9 @@
         if(!tsIso || isNaN(dt.getTime())) continue;
 
         // atributo a la page (match por substring)
-        if(pageNeedle && ref && !String(ref).includes(pageNeedle)) continue;
+        if (pageNeedle && (!ref || !String(ref).includes(pageNeedle))) continue;
+
+        if (id === "unknown") continue;
 
         const age = now - dt;
         if(age <= ms28){
