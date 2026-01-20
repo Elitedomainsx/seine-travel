@@ -39,6 +39,54 @@ def _pick_sheet_name(sheet_titles: List[str]) -> str:
     return sheet_titles[0]
 
 
+def _sanitize_header(header: List[object]) -> List[str]:
+    """Make sure we always have non-empty, unique column names."""
+    cleaned: List[str] = []
+    seen = set()
+    for i, h in enumerate(header):
+        name = str(h).strip() if h is not None else ""
+        if not name:
+            name = f"col_{i+1}"
+        # Ensure uniqueness
+        base = name
+        j = 2
+        while name in seen:
+            name = f"{base}_{j}"
+            j += 1
+        seen.add(name)
+        cleaned.append(name)
+    return cleaned
+
+
+def _normalize_rows(rows: List[list], ncols: int) -> tuple[list, int, int, int]:
+    """Pad/truncate ragged rows so pandas doesn't explode.
+
+    Google Sheets API omits trailing empty cells, which creates ragged rows.
+    """
+    fixed: list = []
+    padded = truncated = skipped_empty = 0
+
+    for r in rows:
+        if r is None:
+            continue
+
+        # Skip totally empty rows
+        if not any(str(x).strip() for x in r):
+            skipped_empty += 1
+            continue
+
+        if len(r) < ncols:
+            padded += 1
+            r = r + [""] * (ncols - len(r))
+        elif len(r) > ncols:
+            truncated += 1
+            r = r[:ncols]
+
+        fixed.append(r)
+
+    return fixed, padded, truncated, skipped_empty
+
+
 def fetch_econ_sheet_to_csv(
     spreadsheet_id: str,
     output_csv: str,
@@ -61,15 +109,26 @@ def fetch_econ_sheet_to_csv(
 
     header = values[0]
     rows = values[1:]
+
     # If the first row doesn't look like headers, keep it as data.
     header_l = [str(h).strip().lower() for h in header]
     looks_like_header = any(k in header_l for k in ["id", "ref", "referer", "timestamp", "time", "date"])
     if not looks_like_header:
-        # synth headers
         rows = values
-        header = [f"col_{i}" for i in range(len(values[0]))]
+        header = [f"col_{i+1}" for i in range(len(values[0]))]
 
-    df = pd.DataFrame(rows, columns=header)
+    header = _sanitize_header(header)
+
+    # IMPORTANT: Normalize ragged rows (Sheets API omits trailing empty cells)
+    n = len(header)
+    fixed_rows, padded, truncated, skipped_empty = _normalize_rows(rows, n)
+    if padded or truncated or skipped_empty:
+        print(
+            f"[ECON] Normalized rows: padded={padded}, truncated={truncated}, "
+            f"skipped_empty={skipped_empty}, expected_cols={n}"
+        )
+
+    df = pd.DataFrame(fixed_rows, columns=header)
 
     os.makedirs(os.path.dirname(output_csv) or ".", exist_ok=True)
     df.to_csv(output_csv, index=False)
