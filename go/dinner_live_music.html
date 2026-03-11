@@ -7,19 +7,41 @@
 
   <script>
     const logger = "https://script.google.com/macros/s/AKfycbxfeY94DrFvyDD-JWOlpTN-5GTYwqQ_pryp_yNHFmrHQdIvj5fNHtE34zXqMS4jVvAEEw/exec";
-    const outbound = "https://www.getyourguide.com/paris-l16/bateaux-parisiens-dinner-cruise-t51059/?partner_id=X3LLOUG&utm_medium=online_publisher";
+    const offers = {
+      bateaux_parisiens: {
+        id: "dinner_live_music",
+        outbound: "https://www.getyourguide.com/paris-l16/bateaux-parisiens-dinner-cruise-t51059/?partner_id=X3LLOUG&utm_medium=online_publisher"
+      },
+      bistronomic: {
+        id: "dinner_bistronomic",
+        outbound: "https://www.getyourguide.com/paris-l16/paris-seine-river-bistronomic-dinner-cruise-t495595/?partner_id=X3LLOUG&utm_medium=online_publisher"
+      },
+      bateaux_mouches: {
+        id: "dinner_bateaux_mouches",
+        outbound: "https://www.getyourguide.com/paris-l16/paris-4-course-dinner-cruise-on-seine-river-with-live-music-t465480/?partner_id=X3LLOUG&utm_medium=online_publisher"
+      },
+      paris_en_scene: {
+        id: "dinner_paris_en_scene",
+        outbound: "https://www.getyourguide.com/paris-l16/paris-dinner-cruise-t179570/?partner_id=X3LLOUG&utm_medium=online_publisher"
+      },
+      gourmet_choice: {
+        id: "dinner_gourmet_choice",
+        outbound: "https://www.getyourguide.com/paris-l16/paris-3-course-dinner-cruise-on-the-river-seine-t53306/?partner_id=X3LLOUG&utm_medium=online_publisher"
+      }
+    };
+
+    const selectedOffer = new URLSearchParams(window.location.search).get("offer") || "bateaux_parisiens";
+    const current = offers[selectedOffer] || offers.bateaux_parisiens;
 
     const params = new URLSearchParams({
-      id: "dinner_live_music",
+      id: current.id,
       ua: navigator.userAgent,
       ref: document.referrer || ""
     });
 
     fetch(logger + "?" + params.toString(), { mode: "no-cors" }).catch(()=>{});
-    setTimeout(() => { window.location.href = outbound; }, 150);
+    setTimeout(() => { window.location.href = current.outbound; }, 150);
   </script>
-
-  <meta http-equiv="refresh" content="0; url=https://www.getyourguide.com/paris-l16/bateaux-parisiens-dinner-cruise-t51059/?partner_id=X3LLOUG&utm_medium=online_publisher"/>
 </head>
 <body>Redirecting…</body>
 </html>
