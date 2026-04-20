@@ -1514,6 +1514,105 @@
         "current_outbound_per_1k_impr": 10.507080858839652,
         "best_outbound_per_1k_impr": 10.507080858839652
       }
+    },
+    {
+      "timestamp_utc": "2026-04-20T10:27:35.316535Z",
+      "action": "explore",
+      "changed_html": true,
+      "window": {
+        "start": "2026-03-31",
+        "end": "2026-04-17"
+      },
+      "page": "best-seine-cruises.html",
+      "dominant_intent": "comparison",
+      "top_queries": [
+        {
+          "query": "which seine river cruise is the best",
+          "impressions": 127,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 31.716535433070867
+        },
+        {
+          "query": "best seine river cruise",
+          "impressions": 98,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 27.642857142857142
+        },
+        {
+          "query": "best seine river cruise paris",
+          "impressions": 61,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 37.09836065573771
+        },
+        {
+          "query": "best seine river cruise paris to normandy",
+          "impressions": 40,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 55.575
+        },
+        {
+          "query": "river cruises on the seine",
+          "impressions": 26,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 39.19230769230769
+        },
+        {
+          "query": "best paris river cruise",
+          "impressions": 20,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 27.8
+        },
+        {
+          "query": "best seine cruise paris",
+          "impressions": 19,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 37.36842105263158
+        },
+        {
+          "query": "best seine cruises paris",
+          "impressions": 18,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 36.72222222222222
+        }
+      ],
+      "can_change": true,
+      "chosen": {
+        "intent": "comparison",
+        "template_index": 0,
+        "variant_key": "comparison#0",
+        "changed_html": true,
+        "title": "Best Seine River Cruises in Paris (2026) \u2013 Prices & Reviews",
+        "meta": "Compare the best Seine River Cruises in Paris by price, route and experience. See which option is worth booking."
+      },
+      "metrics": {
+        "impressions": 481.0,
+        "gsc_clicks": 0.0,
+        "gsc_ctr": 0.0,
+        "gsc_position": 39.35025004661217,
+        "econ_enabled": true,
+        "outbound_clicks": 12,
+        "outbound_by_id": {
+          "dinner_live_music": 5,
+          "champagne": 3,
+          "audio_1h": 2,
+          "night_music": 1,
+          "private_90m": 1
+        },
+        "outbound_per_1k_impr": 24.948024948024948
+      },
+      "best_variant_key": "comparison#1",
+      "scores": {
+        "current_outbound_per_1k_impr": 13.108614232209737,
+        "best_outbound_per_1k_impr": 13.108614232209737
+      }
     }
   ],
   "baseline": {
@@ -1776,28 +1875,49 @@
             },
             "outbound_per_1k_impr": 26.06310013717421
           }
+        },
+        {
+          "window": {
+            "start": "2026-03-31",
+            "end": "2026-04-17"
+          },
+          "metrics": {
+            "impressions": 481.0,
+            "gsc_clicks": 0.0,
+            "gsc_ctr": 0.0,
+            "gsc_position": 39.35025004661217,
+            "outbound_clicks": 12,
+            "outbound_by_id": {
+              "dinner_live_music": 5,
+              "champagne": 3,
+              "audio_1h": 2,
+              "night_music": 1,
+              "private_90m": 1
+            },
+            "outbound_per_1k_impr": 24.948024948024948
+          }
         }
       ],
       "score_agg": {
-        "impressions": 2189.0,
+        "impressions": 2670.0,
         "gsc_clicks": 0.0,
-        "outbound_clicks": 23.0,
-        "outbound_per_1k_impr": 10.507080858839652,
-        "n_obs": 5
+        "outbound_clicks": 35.0,
+        "outbound_per_1k_impr": 13.108614232209737,
+        "n_obs": 6
       }
     }
   },
   "best_variant_key": "comparison#1",
-  "active_variant_key": "comparison#1",
+  "active_variant_key": "comparison#0",
   "active_variant": {
-    "variant_key": "comparison#1",
+    "variant_key": "comparison#0",
     "intent": "comparison",
-    "template_index": 1,
-    "title": "Which Is the Best Seine River Cruises? Honest Paris Comparison",
-    "meta": "Not sure which Seine River Cruises to choose? We compare top Paris options to help you decide.",
-    "applied_at_utc": "2026-03-30T10:08:27.816754Z"
+    "template_index": 0,
+    "title": "Best Seine River Cruises in Paris (2026) \u2013 Prices & Reviews",
+    "meta": "Compare the best Seine River Cruises in Paris by price, route and experience. See which option is worth booking.",
+    "applied_at_utc": "2026-04-20T10:27:35.316525Z"
   },
   "template_index_by_intent": {
-    "comparison": 0
+    "comparison": 1
   }
 }
