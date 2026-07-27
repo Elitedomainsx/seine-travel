@@ -1,15 +1,15 @@
 # Autopilot latest cycle
 
-- Timestamp (UTC): 2026-07-20T11:36:49.493755Z
-- Window: 2026-06-19 → 2026-07-17
-- Action: **hold**
-- Active variant: `comparison#1`
+- Timestamp (UTC): 2026-07-27T12:12:10.168533Z
+- Window: 2026-07-14 → 2026-07-24
+- Action: **explore**
+- Active variant: `comparison#0`
 - Best variant: `comparison#1`
 
 ## KPIs (latest window)
-- Impressions: 542
+- Impressions: 201
 - GSC Clicks: 0
-- Outbound clicks: 9
-- Outbound / 1k impr: 16.61
+- Outbound clicks: 5
+- Outbound / 1k impr: 24.88
 - CTR: 0.0000
-- Avg position: 53.17
+- Avg position: 50.69
