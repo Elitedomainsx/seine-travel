@@ -3640,6 +3640,99 @@
         "current_outbound_per_1k_impr": 14.494612621857362,
         "best_outbound_per_1k_impr": 14.494612621857362
       }
+    },
+    {
+      "timestamp_utc": "2026-09-21T15:30:02.751076Z",
+      "action": "hold_not_enough_impressions",
+      "changed_html": false,
+      "window": {
+        "start": "2026-09-15",
+        "end": "2026-09-18"
+      },
+      "page": "best-seine-cruises.html",
+      "dominant_intent": "comparison",
+      "top_queries": [
+        {
+          "query": "best seine river cruise paris",
+          "impressions": 7,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 25.428571428571427
+        },
+        {
+          "query": "which seine river cruise is the best",
+          "impressions": 6,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 45.66666666666666
+        },
+        {
+          "query": "best paris river dinner cruise",
+          "impressions": 6,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 41.66666666666666
+        },
+        {
+          "query": "best seine river cruise",
+          "impressions": 4,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 29.75
+        },
+        {
+          "query": "best seine river dinner cruise paris",
+          "impressions": 4,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 34.25
+        },
+        {
+          "query": "best seine cruise paris",
+          "impressions": 3,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 31.0
+        },
+        {
+          "query": "best paris river cruise dinner",
+          "impressions": 3,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 42.333333333333336
+        },
+        {
+          "query": "luxury seine river cruise",
+          "impressions": 2,
+          "clicks": 0,
+          "ctr": 0.0,
+          "position": 62.5
+        }
+      ],
+      "can_change": false,
+      "chosen": {
+        "intent": "comparison",
+        "template_index": 1,
+        "variant_key": "comparison#0",
+        "changed_html": false,
+        "title": null,
+        "meta": null
+      },
+      "metrics": {
+        "impressions": 45.0,
+        "gsc_clicks": 0.0,
+        "gsc_ctr": 0.0,
+        "gsc_position": 39.65266106442577,
+        "econ_enabled": true,
+        "outbound_clicks": 0,
+        "outbound_by_id": {},
+        "outbound_per_1k_impr": 0.0
+      },
+      "best_variant_key": "comparison#1",
+      "scores": {
+        "current_outbound_per_1k_impr": 11.172089376715014,
+        "best_outbound_per_1k_impr": 14.494612621857362
+      }
     }
   ],
   "baseline": {
@@ -3985,14 +4078,29 @@
             "outbound_by_id": {},
             "outbound_per_1k_impr": 0.0
           }
+        },
+        {
+          "window": {
+            "start": "2026-09-15",
+            "end": "2026-09-18"
+          },
+          "metrics": {
+            "impressions": 45.0,
+            "gsc_clicks": 0.0,
+            "gsc_ctr": 0.0,
+            "gsc_position": 39.65266106442577,
+            "outbound_clicks": 0,
+            "outbound_by_id": {},
+            "outbound_per_1k_impr": 0.0
+          }
         }
       ],
       "score_agg": {
-        "impressions": 5057.0,
+        "impressions": 5102.0,
         "gsc_clicks": 0.0,
         "outbound_clicks": 57.0,
-        "outbound_per_1k_impr": 11.271504844769627,
-        "n_obs": 16
+        "outbound_per_1k_impr": 11.172089376715014,
+        "n_obs": 17
       }
     },
     "comparison#1": {
