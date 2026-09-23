@@ -1,26 +1,28 @@
-name: Seine Autopilot
+name: Seine Search Console editorial export
 
 on:
   workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/autopilot.yml
   schedule:
-    - cron: "0 9 * * 1"  # Mondays 09:00 UTC
+    - cron: "17 2 * * 1,4" # Monday/Thursday UTC, ahead of the Argentina morning calendar
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  autopilot:
+  export:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     env:
       GSC_CREDENTIALS_JSON: ${{ secrets.GSC_CREDENTIALS_JSON }}
-      # BYPASS_GUARDRAIL: "1"   # enable only for manual testing
+      GSC_SITE_URL: sc-domain:seine.travel
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,23 +30,15 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      - name: Run autopilot (fetch GSC + ECON, decide, apply, log)
-        run: |
-          python -m autopilot.run
+      - name: Export editorial Search Console data
+        run: python -m autopilot.gsc_editorial_export
 
-      - name: Commit & push if changed
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "seine-autopilot"
-            git config user.email "seine-autopilot@users.noreply.github.com"
-            git add data/gsc_latest.csv data/econ_clicks_latest.csv best-seine-cruises.html autopilot/state.json autopilot/logs dashboard
-            git commit -m "autopilot: metrics + snippet decision"
-            git push
-          else
-            echo "No changes to commit."
-          fi
-
+      - name: Save editorial export
+        uses: actions/upload-artifact@v4
+        with:
+          name: seine-gsc-editorial-${{ github.run_id }}
+          path: gsc-editorial-export/
+          if-no-files-found: error
+          retention-days: 60
