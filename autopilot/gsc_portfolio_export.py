@@ -42,7 +42,7 @@ def matching_prefixes(slug, accessible):
 
 def export_property(api,slug,site,end):
     windows={}
-    for days in (28,90):
+    for days in (28,90,480):
         start=end-timedelta(days=days-1);counts={}
         for label,dims in (("queries",["query"]),("pages",["page"]),("page_queries",["page","query"])):
             rows=query_rows(api,site,start,end,dims)
