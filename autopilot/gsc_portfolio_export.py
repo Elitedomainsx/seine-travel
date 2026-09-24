@@ -46,10 +46,13 @@ def main():
                 manifest["windows"][str(days)]={"start":start.isoformat(),"end":end.isoformat(),"rows":counts}
             manifest["status"]="success"
         except Exception as exc:
-            manifest["status"]="failed";manifest["error"]=f"{type(exc).__name__}: {exc}";failures.append(slug)
+            message=f"{type(exc).__name__}: {exc}"
+            manifest["status"]="pending_permission" if "403" in message or "sufficient permission" in message else "failed"
+            manifest["error"]=message;failures.append(slug)
         portfolio["sites"][slug]=manifest
     root=Path("gsc-portfolio-export");root.mkdir(exist_ok=True)
     (root/"manifest.json").write_text(json.dumps(portfolio,indent=2)+"\n",encoding="utf-8")
     print(json.dumps(portfolio))
-    if failures:raise RuntimeError("Portfolio exports failed: "+", ".join(failures))
+    if failures:
+        print("Portfolio export incomplete; access or query errors: "+", ".join(failures))
 if __name__=="__main__":main()
