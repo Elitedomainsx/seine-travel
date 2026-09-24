@@ -74,7 +74,7 @@ def main():
         "note": "API rows may omit anonymized queries and are not an exhaustive list of searches.",
         "windows": {},
     }
-    for days in (28, 90):
+    for days in (28, 90, 480):
         start = end - timedelta(days=days - 1)
         counts = {}
         for label, dimensions in (
@@ -85,8 +85,6 @@ def main():
             rows = query_rows(service, start, end, dimensions)
             write_csv(f"{days}d_{label}.csv", rows)
             if days == 28 and label == "page_queries":
-                # Reuse the repository's existing readable CSV for the calendar.
-                # Complete 28/90-day exports remain in the Actions artifact.
                 with Path("data/gsc_latest.csv").open("w", newline="", encoding="utf-8") as handle:
                     writer = csv.DictWriter(handle, fieldnames=FIELDS)
                     writer.writeheader()
