@@ -84,6 +84,13 @@ def main():
         ):
             rows = query_rows(service, start, end, dimensions)
             write_csv(f"{days}d_{label}.csv", rows)
+            if days == 28 and label == "page_queries":
+                # Reuse the repository's existing readable CSV for the calendar.
+                # Complete 28/90-day exports remain in the Actions artifact.
+                with Path("data/gsc_latest.csv").open("w", newline="", encoding="utf-8") as handle:
+                    writer = csv.DictWriter(handle, fieldnames=FIELDS)
+                    writer.writeheader()
+                    writer.writerows(rows)
             counts[label] = len(rows)
         manifest["windows"][str(days)] = {"start": start.isoformat(), "end": end.isoformat(), "rows": counts}
     (OUTPUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
